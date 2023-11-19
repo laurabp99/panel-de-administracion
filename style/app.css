@@ -1,0 +1,157 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(59, 59, 226);
+    display: block;
+}
+
+.header {
+    margin: 40px;
+}
+
+.header-principal{
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-name {
+    font-family:Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+.header-title {
+    font-family:Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+.menu{
+    width: 40px;
+    margin-left: auto;
+}
+
+.filter-bar {
+    background-color: white;
+    margin: 40px;
+}
+
+.filters {
+    background-color: white;
+    margin: 30 auto;
+    width: 30px;
+}
+
+main{
+    display:block;
+}
+
+.interface {
+    display: flex;
+}
+
+ul {
+    list-style: none;
+    margin-left: 10px;
+}
+    
+
+.registers {
+    display: block;
+    background-color: rgb(59, 59, 226);
+    margin-left: 40px;
+    width: 35%;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+.register{
+    display: block;
+
+}
+
+.modify-register{
+    display: flex;
+    background-color: aqua;
+    justify-content: flex-end;
+}
+
+.edit{
+    width: 30px;
+}
+
+.delete{
+    width: 30px;
+}
+
+.register-data{
+    background-color:rgb(109, 109, 238);
+
+}
+
+.form {
+    background-color: green;
+    margin-right: 40px;
+    width: 65%;
+}
+
+.form-top{
+    display: flex;
+    background-color: aqua;
+}
+
+.pestanas{
+    display: flex;
+    margin: 5px;
+}
+
+.form-buttons{
+    display: flex;
+    margin-left: auto;
+    margin-right: 5px;
+}
+
+.form-clear {
+    width: 40px;
+}
+
+.form-save {
+    width: 40px;
+}
+
+.images{
+
+}
+
+.form-inputs{
+
+}
+
+.form-cell{
+    background-color: chartreuse;
+    display: flex;
+}
+
+.form-title-name{
+
+}
+
+.form-name{
+
+}
+
+.form-email{
+
+}
+
+.form-password{
+
+}
+
+.form-password-repeat{
+
+}
