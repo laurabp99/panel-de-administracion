@@ -9,11 +9,11 @@ body {
 }
 
 .header {
-    margin: 60px;
+    margin: 5%;
 }
 
 .header-principal{
-    background-color: aqua;
+    background-color: hsl(240, 74%, 56%);
     display: flex;
     justify-content: space-between;
 }
@@ -30,12 +30,16 @@ body {
 
 .menu{
     width: 40px;
-    margin-right: 10px;
+    padding-right: 10px;
+    padding-left: 4rem;
+}
+
+.menu svg{
+ fill:white
 }
 
 .filter-bar {
     background-color: white;
-    margin: 60px;
 }
 
 .filters {
@@ -44,24 +48,29 @@ body {
     width: 30px;
 }
 
+.filters svg {
+    fill: rgb(127, 178, 245);
+}
+
 main{
     display:block;
 }
 
 .interface {
     display: flex;
+    gap: 2rem;
 }
 
 ul {
     list-style: none;
     margin-left: 10px;
 }
-    
+
 
 .registers {
     display: block;
-    background-color: rgb(44, 44, 228);
-    justify-content: center;
+    background-color: hsl(240, 74%, 56%);
+    justify-content: space-between;
     margin-left: 60px;
     width: 35%;
     font-size: 20px;
@@ -69,14 +78,19 @@ ul {
     color: white;
 }
 
+.registers svg{
+    fill:white
+}
+
 .register{
     display: block;
-
+    padding: 0.5rem;
+    gap: 3rem;
 }
 
 .modify-register{
     display: flex;
-    background-color: aqua;
+    background-color: hsl(194, 100%, 50%);
     justify-content: flex-end;
 }
 
@@ -89,30 +103,54 @@ ul {
 }
 
 .register-data{
-    background-color:rgb(109, 109, 238);
+    background-color:hsl(240, 79%, 68%);
 
 }
 
 .form {
-    background-color: green;
-    margin-right: 60px;
-    width: 65%;
+    display: block;
+    background-color: hsl(240, 74%, 56%);
+    margin-right: 5%;
+    width: 60%;
 }
 
 .form-top{
     display: flex;
-    background-color: aqua;
+    background-color: white;
 }
 
 .pestanas{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 90%;
     display: flex;
-    margin: 5px;
+}
+
+.pestana{
+    width:50%;
+    background-color: grey;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding:5%;
+}
+
+.principal{
+    background-color: green;
+    color:white;
+}
+
+.imagenes{
+
 }
 
 .form-buttons{
     display: flex;
     margin-left: auto;
     margin-right: 5px;
+}
+
+.form-buttons svg {
+    fill: rgb(127, 178, 245);
 }
 
 .form-clear {
@@ -123,17 +161,27 @@ ul {
     width: 40px;
 }
 
-.images{
-
-}
 
 .form-inputs{
-
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 4%;
 }
 
-.form-cell{
-    background-color: chartreuse;
-    display: flex;
+.form-element{
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: hsl(240, 74%, 56%);
+    flex-wrap: wrap;
+    width: 45%;
+}
+
+.form-inputs input{
+    width: 100%;
+    height: 60%;
+    background-color: hsl(240, 79%, 68%);
 }
 
 .form-title-name{

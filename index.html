@@ -32,14 +32,14 @@
                             d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
                 </div>
             </div>
-        </header>
-        <main>
             <div class="filter-bar">
                 <div class="filters">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>filter-menu</title><path
                             d="M11 11L16.76 3.62A1 1 0 0 0 16.59 2.22A1 1 0 0 0 16 2H2A1 1 0 0 0 1.38 2.22A1 1 0 0 0 1.21 3.62L7 11V16.87A1 1 0 0 0 7.29 17.7L9.29 19.7A1 1 0 0 0 10.7 19.7A1 1 0 0 0 11 18.87V11M13 16L18 21L23 16Z" /></svg>
                 </div>
             </div>
+        </header>
+        <main>
             <div class="interface">
                 <div class="registers">
                     <div class="register">
@@ -130,8 +130,12 @@
                 <div class="form">
                     <div class="form-top">
                         <div class="pestanas">
-                            <h2>Principal</h2>
-                            <h2>Imágenes</h2>
+                            <div class="pestana principal">
+                                <h2>Principal</h2>
+                            </div>
+                            <div class="pestana imagenes">
+                                <h2>Imágenes</h2>
+                            </div>
                         </div>
                         <div class="form-buttons">
                             <div class="form-clear">
@@ -147,35 +151,35 @@
                         </div>
                     </div>
                     <div class="form-inputs">
-                        <div class="form-cell">
-                            <div class="form-title-name">
-                                <h2>Nombre</h2>
+                        <div class="form-element">
+                            <div class="form-label">
+                                <label>Nombre</label>
                             </div>
-                            <form class="form-name">
+                            <form class="form-input">
                                 <input type="text">
                             </form>
                         </div>
-                        <div class="form-cell">
-                            <div class="form-title-email">
-                                <h2>Email</h2>
+                        <div class="form-element">
+                            <div class="form-label">
+                                <label>Email</label>
                             </div>
-                            <form class="form-email">
+                            <form class="form-input">
                                 <input type="email">
                             </form>
                         </div>
-                        <div class="form-cell">
-                            <div class="form-title-password">
-                                <h2>Password</h2>
+                        <div class="form-element">
+                            <div class="form-label">
+                                <label>Password</label>
                             </div>
-                            <form class="form-password">
+                            <form class="form-input">
                                 <input type="password">
                             </form>
                         </div>
-                        <div class="form-cell">
-                            <div class="form-title-password-repeat">
-                                <h2>Repetir password</h2>
+                        <div class="form-element">
+                            <div class="form-label">
+                                <label>Repetir password</label>
                             </div>
-                            <div class="form-password-repeat">
+                            <div class="form-input">
                                 <input type="password">
                             </div>
                         </div>
