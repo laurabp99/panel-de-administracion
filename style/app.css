@@ -5,51 +5,55 @@
 
 body {
     background-color: rgb(59, 59, 226);
-    display: block;
+    margin: 0 auto;
+    width: 90%;
 }
 
-.header {
-    margin: 5%;
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Roboto', sans-serif;    
+    color: hsl(0, 0%, 100%);
+}
+
+label, span, li, input, p, textarea, select {
+    font-family: 'Roboto', sans-serif;   
+    color: hsl(0, 0%, 100%);
+}
+
+ul {
+    list-style: none;
 }
 
 .header-principal{
     background-color: hsl(240, 74%, 56%);
     display: flex;
     justify-content: space-between;
+    padding: 1.5rem 0;
 }
 
-.header-name {
-    font-family:Arial, Helvetica, sans-serif;
-    color: white;
-}
-
-.header-title {
-    font-family:Arial, Helvetica, sans-serif;
-    color: white;
-}
-
-.menu{
-    width: 40px;
-    padding-right: 10px;
-    padding-left: 4rem;
+.header-title{
+    transform: translateX(-30%);
 }
 
 .menu svg{
- fill:white
+    fill:hsl(0, 0%, 100%);
+    width: 2.5rem;
 }
 
 .filter-bar {
     background-color: white;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    padding: 0.5rem 0;
 }
 
 .filters {
     background-color: white;
-    margin: 30 auto;
-    width: 30px;
 }
 
 .filters svg {
     fill: rgb(127, 178, 245);
+    width: 2rem;
 }
 
 main{
@@ -58,24 +62,16 @@ main{
 
 .interface {
     display: flex;
-    gap: 2rem;
+    gap: 3rem;
 }
-
-ul {
-    list-style: none;
-    margin-left: 10px;
-}
-
 
 .registers {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
     background-color: hsl(240, 74%, 56%);
-    justify-content: space-between;
-    margin-left: 60px;
-    width: 35%;
     font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
 }
 
 .registers svg{
@@ -83,8 +79,6 @@ ul {
 }
 
 .register{
-    display: block;
-    padding: 0.5rem;
     gap: 3rem;
 }
 
@@ -92,6 +86,7 @@ ul {
     display: flex;
     background-color: hsl(194, 100%, 50%);
     justify-content: flex-end;
+    padding: 0.5rem 0;
 }
 
 .edit{
@@ -104,102 +99,96 @@ ul {
 
 .register-data{
     background-color:hsl(240, 79%, 68%);
+    padding: 0.5rem;
+}
 
+.register-data ul li{
+    color:hsl(0, 0%, 100%);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.register-data ul li span{
+    font-weight: 600;
+}
+
+.register-data ul li span::after{
+    content: ":";
+    margin-right: 0.5rem;
 }
 
 .form {
-    display: block;
     background-color: hsl(240, 74%, 56%);
-    margin-right: 5%;
-    width: 60%;
+    flex: 2;
 }
 
 .form-top{
     display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
     background-color: white;
+    padding-right: 0.5rem;
 }
 
-.pestanas{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 90%;
+.tabs{
     display: flex;
 }
 
-.pestana{
-    width:50%;
-    background-color: grey;
+.tab{
+    cursor: pointer;
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    padding:5%;
+    padding: 1rem;
 }
 
-.principal{
-    background-color: green;
-    color:white;
+.tab.active{
+    background-color: hsl(194, 100%, 50%);
 }
 
-.imagenes{
+.tab.active h2{
+    color:hsl(0, 0%, 100%);
+}
 
+.tab h2{
+    color:hsl(194, 100%, 50%);
 }
 
 .form-buttons{
+    align-items: center;
     display: flex;
-    margin-left: auto;
-    margin-right: 5px;
+    justify-content: flex-end;
 }
 
-.form-buttons svg {
+.form-clear svg, .form-save svg {
+    width: 2rem;
+}
+
+.form-clear svg path, .form-save svg path{
     fill: rgb(127, 178, 245);
 }
 
-.form-clear {
-    width: 40px;
-}
-
-.form-save {
-    width: 40px;
-}
-
-
-.form-inputs{
-    width: 100%;
+form{
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
-    margin-top: 4%;
+    gap: 2%;
 }
 
 .form-element{
-    color: white;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     background-color: hsl(240, 74%, 56%);
-    flex-wrap: wrap;
-    width: 45%;
+    margin-bottom: 0.5rem;
+    width: 49%;
 }
 
-.form-inputs input{
+.form-label{
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.form-element input{
+    border: none;
+    padding: 0.5rem;
     width: 100%;
-    height: 60%;
     background-color: hsl(240, 79%, 68%);
-}
-
-.form-title-name{
-
-}
-
-.form-name{
-
-}
-
-.form-email{
-
-}
-
-.form-password{
-
-}
-
-.form-password-repeat{
-
 }
