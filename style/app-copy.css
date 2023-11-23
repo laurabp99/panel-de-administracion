@@ -30,14 +30,14 @@ body {
     color: white;
 }
 
-.menu{
+#menu-button{
     width: 40px;
-    padding-right: 10px;
-    padding-left: 4rem;
+    cursor: pointer;
 }
 
-.menu svg{
-    fill:white
+.menu-button svg{
+    fill:white;
+    width: 40px;
 }
 
 main{
@@ -182,4 +182,20 @@ ul {
     width: 100%;
     height: 60%;
     background-color: hsl(240, 79%, 68%);
+}
+
+#curtain {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 2s;
+    background-color: hsla(0, 43%, 45%, 0.568);
+}
+
+
+#curtain.active {
+    background-color: hsla(0, 0%, 0%, 0.568);
 }
