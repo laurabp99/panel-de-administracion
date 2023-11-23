@@ -9,7 +9,9 @@ body {
 }
 
 .header {
-    margin: 5%;
+    width: 85%;
+    margin: auto;
+    margin-top: 2rem;
 }
 
 .header-principal{
@@ -35,7 +37,13 @@ body {
 }
 
 .menu svg{
- fill:white
+    fill:white
+}
+
+main{
+    display:block;
+    width: 85%;
+    margin: auto;
 }
 
 .filter-bar {
@@ -52,9 +60,6 @@ body {
     fill: rgb(127, 178, 245);
 }
 
-main{
-    display:block;
-}
 
 .interface {
     display: flex;
@@ -68,10 +73,11 @@ ul {
 
 
 .registers {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     background-color: hsl(240, 74%, 56%);
     justify-content: space-between;
-    margin-left: 60px;
     width: 35%;
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
@@ -83,8 +89,6 @@ ul {
 }
 
 .register{
-    display: block;
-    padding: 0.5rem;
     gap: 3rem;
 }
 
@@ -110,8 +114,7 @@ ul {
 .form {
     display: block;
     background-color: hsl(240, 74%, 56%);
-    margin-right: 5%;
-    width: 60%;
+    width: 70%;
 }
 
 .form-top{
@@ -119,13 +122,13 @@ ul {
     background-color: white;
 }
 
-.pestanas{
+.tabs{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 90%;
     display: flex;
 }
 
-.pestana{
+.tab{
     width:50%;
     background-color: grey;
     display: flex;
@@ -139,9 +142,6 @@ ul {
     color:white;
 }
 
-.imagenes{
-
-}
 
 .form-buttons{
     display: flex;
@@ -175,31 +175,11 @@ ul {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: hsl(240, 74%, 56%);
     flex-wrap: wrap;
-    width: 45%;
+    width: 47%;
 }
 
 .form-inputs input{
     width: 100%;
     height: 60%;
     background-color: hsl(240, 79%, 68%);
-}
-
-.form-title-name{
-
-}
-
-.form-name{
-
-}
-
-.form-email{
-
-}
-
-.form-password{
-
-}
-
-.form-password-repeat{
-
 }
