@@ -1,0 +1,185 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(59, 59, 226);
+    display: block;
+}
+
+.header {
+    width: 85%;
+    margin: auto;
+    margin-top: 2rem;
+}
+
+.header-principal{
+    background-color: hsl(240, 74%, 56%);
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-name {
+    font-family:Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+.header-title {
+    font-family:Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+.menu{
+    width: 40px;
+    padding-right: 10px;
+    padding-left: 4rem;
+}
+
+.menu svg{
+    fill:white
+}
+
+main{
+    display:block;
+    width: 85%;
+    margin: auto;
+}
+
+.filter-bar {
+    background-color: white;
+}
+
+.filters {
+    background-color: white;
+    margin: 30 auto;
+    width: 30px;
+}
+
+.filters svg {
+    fill: rgb(127, 178, 245);
+}
+
+
+.interface {
+    display: flex;
+    gap: 2rem;
+}
+
+ul {
+    list-style: none;
+    margin-left: 10px;
+}
+
+
+.registers {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: hsl(240, 74%, 56%);
+    justify-content: space-between;
+    width: 35%;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+.registers svg{
+    fill:white
+}
+
+.register{
+    gap: 3rem;
+}
+
+.modify-register{
+    display: flex;
+    background-color: hsl(194, 100%, 50%);
+    justify-content: flex-end;
+}
+
+.edit{
+    width: 30px;
+}
+
+.delete{
+    width: 30px;
+}
+
+.register-data{
+    background-color:hsl(240, 79%, 68%);
+
+}
+
+.form {
+    display: block;
+    background-color: hsl(240, 74%, 56%);
+    width: 70%;
+}
+
+.form-top{
+    display: flex;
+    background-color: white;
+}
+
+.tabs{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 90%;
+    display: flex;
+}
+
+.tab{
+    width:50%;
+    background-color: grey;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding:5%;
+}
+
+.principal{
+    background-color: green;
+    color:white;
+}
+
+
+.form-buttons{
+    display: flex;
+    margin-left: auto;
+    margin-right: 5px;
+}
+
+.form-buttons svg {
+    fill: rgb(127, 178, 245);
+}
+
+.form-clear {
+    width: 40px;
+}
+
+.form-save {
+    width: 40px;
+}
+
+
+.form-inputs{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 4%;
+}
+
+.form-element{
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: hsl(240, 74%, 56%);
+    flex-wrap: wrap;
+    width: 47%;
+}
+
+.form-inputs input{
+    width: 100%;
+    height: 60%;
+    background-color: hsl(240, 79%, 68%);
+}
