@@ -39,28 +39,14 @@
         <main>
             <div class="filter-bar">
                 <div class="filter-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Filter Menu</title><path
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Filter
+                            Menu</title><path
                             d="M11 11L16.76 3.62A1 1 0 0 0 16.59 2.22A1 1 0 0 0 16 2H2A1 1 0 0 0 1.38 2.22A1 1 0 0 0 1.21 3.62L7 11V16.87A1 1 0 0 0 7.29 17.7L9.29 19.7A1 1 0 0 0 10.7 19.7A1 1 0 0 0 11 18.87V11M13 16L18 21L23 16Z" /></svg>
                 </div>
-                <div class="filter-menu">
-                    <form class="filter-form">
-                        <div class="form-element">
-                            <div class="form-label">
-                                <label>Nombre</label>
-                            </div>
-                            <div class="form-input">
-                                <input type="text">
-                            </div>
-                        </div>
-                        <div class="form-element">
-                            <div class="form-label">
-                                <label>Email</label>
-                            </div>
-                            <div class="form-input">
-                                <input type="email">
-                            </div>
-                        </div>
-                    </form>
+                <div class="filter-modal"> 
+                    <div class="filter-modal-content">
+                        <span class="close"></span>
+                    </div>
                 </div>
             </div>
             <div class="interface">
@@ -150,68 +136,68 @@
                         </div>
                     </div>
                 </div>
-                <div class="form">
-                    <div class="form-top">
-                        <div class="tabs">
-                            <div class="tab principal">
-                                <h2>Principal</h2>
+            </div>
+            <div class="form">
+                <div class="form-top">
+                    <div class="tabs">
+                        <div class="tab principal">
+                            <h2>Principal</h2>
+                        </div>
+                        <div class="tab images">
+                            <h2>Imágenes</h2>
+                        </div>
+                    </div>
+                    <div class="form-buttons">
+                        <div class="form-clear">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"><title>broom</title><path
+                                    d="M19.36,2.72L20.78,4.14L15.06,9.85C16.13,11.39 16.28,13.24 15.38,14.44L9.06,8.12C10.26,7.22 12.11,7.37 13.65,8.44L19.36,2.72M5.93,17.57C3.92,15.56 2.69,13.16 2.35,10.92L7.23,8.83L14.67,16.27L12.58,21.15C10.34,20.81 7.94,19.58 5.93,17.57Z" /></svg>
+                        </div>
+                        <div class="form-save">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"><title>content-save</title><path
+                                    d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" /></svg>
+                        </div>
+                    </div>
+                </div>
+                <form action>
+                    <div class="form-row">
+                        <div class="form-element">
+                            <div class="form-label">
+                                <label>Nombre</label>
                             </div>
-                            <div class="tab images">
-                                <h2>Imágenes</h2>
+                            <div class="form-input">
+                                <input type="text">
                             </div>
                         </div>
-                        <div class="form-buttons">
-                            <div class="form-clear">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"><title>broom</title><path
-                                        d="M19.36,2.72L20.78,4.14L15.06,9.85C16.13,11.39 16.28,13.24 15.38,14.44L9.06,8.12C10.26,7.22 12.11,7.37 13.65,8.44L19.36,2.72M5.93,17.57C3.92,15.56 2.69,13.16 2.35,10.92L7.23,8.83L14.67,16.27L12.58,21.15C10.34,20.81 7.94,19.58 5.93,17.57Z" /></svg>
+                        <div class="form-element">
+                            <div class="form-label">
+                                <label>Email</label>
                             </div>
-                            <div class="form-save">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"><title>content-save</title><path
-                                        d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" /></svg>
+                            <div class="form-input">
+                                <input type="email">
                             </div>
                         </div>
                     </div>
-                    <form action="">
-                        <div class="form-row">
-                            <div class="form-element">
-                                <div class="form-label">
-                                    <label>Nombre</label>
-                                </div>
-                                <div class="form-input">
-                                    <input type="text">
-                                </div>
+                    <div class="form-row">
+                        <div class="form-element">
+                            <div class="form-label">
+                                <label>Password</label>
                             </div>
-                            <div class="form-element">
-                                <div class="form-label">
-                                    <label>Email</label>
-                                </div>
-                                <div class="form-input">
-                                    <input type="email">
-                                </div>
+                            <div class="form-input">
+                                <input type="password">
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-element">
-                                <div class="form-label">
-                                    <label>Password</label>
-                                </div>
-                                <div class="form-input">
-                                    <input type="password">
-                                </div>
+                        <div class="form-element">
+                            <div class="form-label">
+                                <label>Repetir password</label>
                             </div>
-                            <div class="form-element">
-                                <div class="form-label">
-                                    <label>Repetir password</label>
-                                </div>
-                                <div class="form-input">
-                                    <input type="password">
-                                </div>
+                            <div class="form-input">
+                                <input type="password">
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </main>
     </body>
