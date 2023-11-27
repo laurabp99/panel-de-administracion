@@ -8,6 +8,10 @@ ul {
     margin-left: 10px;
 }
 
+p{
+    font-size: 25px;
+}
+
 body {
     background-color: rgb(59, 59, 226);
     margin: 0 auto;
@@ -175,7 +179,6 @@ transform: scale(0);
     background-color: hsla(0, 0%, 0%, 0.9);
 }
 
-
 .menu.active {
     top: 0;
 }
@@ -209,6 +212,67 @@ main{
 .filter-button svg {
     width: 2rem;  
     fill: rgb(127, 178, 245);
+    cursor: pointer;
+}
+
+.filter-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: hsla(0, 0%, 0%, 0.5);
+    z-index: 1400;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-modal.active{
+    display: flex;
+    font-size: 20px;
+    font-weight:600;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+}
+
+.filter-modal-content{
+    background-color: hsl(0, 0%, 100%);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px hsla(0, 0%, 0%, 0.1);
+    max-width: 400px;
+    width: 30rem;
+    height: 25rem;
+    text-align: center;
+}
+
+.filter-form{
+    display: block;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.filter-form-row{
+    display: block;
+}
+
+.filter-confirm{
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+}
+
+.filter-yes{
+    background-color: green;
+    width: 7rem;
+    cursor: pointer;
+}
+
+.filter-no{
+    background-color: red;
+    width: 7rem;
     cursor: pointer;
 }
 
