@@ -1,9 +1,16 @@
 export default (() => {
 
-    let deleteButton = document.querySelector(".delete-button");
+    let deleteButtons = document.querySelectorAll(".delete-button");
+    let deleteModal = document.querySelector(".delete-modal");
+    let deleteNo = document.querySelector(".delete-no");
+    let deleteYes = document.querySelector(".delete-yes");
 
-    deleteButton.addEventListener("click", () => {
-        deleteModal.classList.toggle("active");
+    deleteNo?.addEventListener("click", () => {
+        deleteModal.classList.remove("active");
+        event.preventDefault();
     });
-    
+
+    deleteYes?.addEventListener("click", () => {
+        event.preventDefault();
+    });
 })();
