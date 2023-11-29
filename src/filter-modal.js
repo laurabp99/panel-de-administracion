@@ -4,13 +4,14 @@ export default (() => {
     let filterModal = document.querySelector(".filter-modal");
     let filterCloseButton = document.querySelector(".filter-no");
 
-    filterButton?.addEventListener("click", () => {
-        filterButton.classList.toggle("active");
-        filterModal.classList.toggle("active");
-    });
-    
+    document.addEventListener("showFilterModal", (event => {
+        filterModal.classList.add("active");
+    }))
+
     filterCloseButton?.addEventListener("click", () => {
-        filterButton.classList.remove("active");
         filterModal.classList.remove("active");
+    });
+
+    filterButton?.addEventListener("click", () => {
     });
 })();
