@@ -5,9 +5,9 @@ export default (() => {
     tabs.forEach((tab)=>{
         tab?.addEventListener("click",()=>{
             tabs.forEach((tab)=>{
-                tab.classList.remove("principal");
+                tab.classList.remove("first");
             })
-            tab.classList.add("principal");
+            tab.classList.add("first");
         })
     })
     
