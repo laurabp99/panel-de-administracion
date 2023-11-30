@@ -1,5 +1,6 @@
 export default (() => {
     const form = document.querySelector(".form");
+    
 
     form.addEventListener('input', (event) => {
 
@@ -13,9 +14,12 @@ export default (() => {
             }
         }
 
-        if(event.target.closest('.name-validation')){
-            const nameValidation = event.target.closest('.name-validation')
-            if (nameValidation.value.length != validate.dataset.onlyLetters) {
+        const nameValidation = event.target.closest('.name-validation')
+
+        if (nameValidation.classList.contains('name-validation')) {
+            const soloLetras = /^[A-Za-z]+$/;
+
+            if (!soloLetras.test(nameValidation.value)) {
                 nameValidation.classList.add('error');
             } else {
                 nameValidation.classList.remove('error');
