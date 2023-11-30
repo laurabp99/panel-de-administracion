@@ -218,10 +218,10 @@
             <div class="form">
                 <div class="form-top">
                     <div class="tabs">
-                        <div class="tab first">
+                        <div class="tab active" data-tab="general">
                             <h2>Principal</h2>
                         </div>
-                        <div class="tab second">
+                        <div class="tab" data-tab="images">
                             <h2>Imágenes</h2>
                         </div>
                     </div>
@@ -245,39 +245,53 @@
                     </div>
                 </div>
                 <form action>
-                    <div class="form-row">
-                        <div class="form-element">
-                            <div class="form-label">
-                                <label>Nombre</label>
+                    <div class="tab-content active" data-tab="general">
+                        <div class="form-row">
+                            <div class="form-element">
+                                <div class="form-label">
+                                    <label>Nombre</label>
+                                </div>
+                                <div class="form-input">
+                                    <input type="text" class="name-validation" data-onlyletters="true">
+                                </div>
                             </div>
-                            <div class="form-input">
-                                <input type="text">
+                            <div class="form-element">
+                                <div class="form-label">
+                                    <label>Email</label>
+                                </div>
+                                <div class="form-input">
+                                    <input type="email">
+                                </div>
                             </div>
                         </div>
-                        <div class="form-element">
-                            <div class="form-label">
-                                <label>Email</label>
+                        <div class="form-row">
+                            <div class="form-element">
+                                <div class="form-label">
+                                    <label>Password</label>
+                                </div>
+                                <div class="form-input">
+                                    <input type="password" class="validate" data-minlength="8">
+                                </div>
                             </div>
-                            <div class="form-input">
-                                <input type="email">
-                            </div>
+                            <div class="form-element">
+                                <div class="form-label">
+                                    <label>Repetir password</label>
+                                </div>
+                                <div class="form-input">
+                                    <input type="password">
+                                </div>
+                            </div>    
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-element">
-                            <div class="form-label">
-                                <label>Password</label>
-                            </div>
-                            <div class="form-input">
-                                <input type="password">
-                            </div>
-                        </div>
-                        <div class="form-element">
-                            <div class="form-label">
-                                <label>Repetir password</label>
-                            </div>
-                            <div class="form-input">
-                                <input type="password">
+                    <div class="tab-content" data-tab="images">
+                        <div class="form-row">
+                            <div class="form-element">
+                                <div class="form-label">
+                                    <label>Avatar</label>
+                                </div>
+                                <div class="form-input">
+                                    <input type="file">
+                                </div>
                             </div>
                         </div>
                     </div>
