@@ -526,6 +526,10 @@ form{
     border: 2px solid red;
 }
 
+.name-validation.error{
+    border: 2px solid red;
+}
+
 .filter-form input{
     height: 1rem;
     border-radius: 5px;
