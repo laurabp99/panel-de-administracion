@@ -27,21 +27,20 @@
                     <h1>Detectib</h1>
                 </div>
                 <title-component title="Usuarios"></title-component>
-                <menu-component title="Menu"></menu-component>
+                <menu-component></menu-component>
             </div>
         </header>
         <main>
             <div class="delete-modal">
                 <div class="delete-modal-content">
                     <p>¿Quiere eliminar este registro?</p>
-                    
+
                     <div class="delete-modal-buttons">
                         <div class="delete-confirm">
                             <button class="delete-yes">
                                 <p>Sí</p>
                             </button>
                             <button class="delete-no">
-
                                 <p>No</p>
                             </button>
                         </div>
@@ -53,49 +52,12 @@
                     <div class="filter-button">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24">
-                            <title>Filter
-                                Menu</title>
+                            <title>Filter Menu</title>
                             <path
                                 d="M11 11L16.76 3.62A1 1 0 0 0 16.59 2.22A1 1 0 0 0 16 2H2A1 1 0 0 0 1.38 2.22A1 1 0 0 0 1.21 3.62L7 11V16.87A1 1 0 0 0 7.29 17.7L9.29 19.7A1 1 0 0 0 10.7 19.7A1 1 0 0 0 11 18.87V11M13 16L18 21L23 16Z" />
                         </svg>
                     </div>
-                    <div class="filter-modal">
-                        <div class="filter-modal-content">
-                            <div class="filter-table">
-                                <p>Filtraje de tabla</p>
-                                <div class="filter-form">
-                                    <form action>
-                                        <div class="filter-form-row">
-                                            <div class="filter-form-element">
-                                                <div class="form-label">
-                                                    <label>Nombre</label>
-                                                </div>
-                                                <div class="form-input">
-                                                    <input type="text">
-                                                </div>
-                                            </div>
-                                            <div class="filter-form-element">
-                                                <div class="form-label">
-                                                    <label>Email</label>
-                                                </div>
-                                                <div class="form-input">
-                                                    <input type="email">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="filter-confirm">
-                                    <button class="filter-yes">
-                                        <p>Filtrar</p>
-                                    </button>
-                                    <button class="filter-no">
-                                        <p>Cancelar</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <filter-modal-component></filter-modal-component>
                 </div>
                 <div class="registers">
                     <div class="register">
@@ -245,7 +207,8 @@
                                     <label>Nombre</label>
                                 </div>
                                 <div class="form-input">
-                                    <input type="text" class="name-validation" data-onlyletters="true">
+                                    <input type="text" class="name-validation"
+                                        data-onlyletters="true">
                                 </div>
                             </div>
                             <div class="form-element">
@@ -263,7 +226,8 @@
                                     <label>Password</label>
                                 </div>
                                 <div class="form-input">
-                                    <input type="password" class="validate" data-minlength="8">
+                                    <input type="password" class="validate"
+                                        data-minlength="8">
                                 </div>
                             </div>
                             <div class="form-element">
@@ -273,7 +237,7 @@
                                 <div class="form-input">
                                     <input type="password">
                                 </div>
-                            </div>    
+                            </div>
                         </div>
                     </div>
                     <div class="tab-content" data-tab="images">

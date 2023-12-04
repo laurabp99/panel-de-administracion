@@ -277,6 +277,11 @@ main{
     color: #fff;
 }
 
+.filter-form input{
+    height: 1rem;
+    border-radius: 5px;
+}
+
 .filter-form-row{
     display: flex;
     flex-direction: column;
@@ -523,6 +528,7 @@ form{
     outline: none;
 }
 
+
 .validate.error{
     border: 2px solid red;
 }
@@ -531,7 +537,3 @@ form{
     border: 2px solid red;
 }
 
-.filter-form input{
-    height: 1rem;
-    border-radius: 5px;
-}
