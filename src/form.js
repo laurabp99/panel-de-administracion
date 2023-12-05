@@ -249,6 +249,10 @@ class Form extends HTMLElement {
                 });
             }
         })
+        const save = this.shadow.querySelector(".form-save");
+        save.addEventListener('click', async (event) => {
+            document.dispatchEvent(new CustomEvent('message'))
+        })
     }
 }
 

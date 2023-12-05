@@ -34,19 +34,3 @@ header {
 .form-section{
     flex: 2;
 }
-
-.notification-modal { /*ponerle display none cuando esté acabado*/
-    display: flex;
-    background-color: aqua;
-    height: 2rem;
-    padding: 1rem;
-    width: 15rem;
-}
-
-.notification-modal.active {
-    display: flex;
-    background-color: aqua;
-    height: 2rem;
-    padding: 1rem;
-    width: 15rem;
-}
