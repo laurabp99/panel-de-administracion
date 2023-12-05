@@ -16,6 +16,12 @@ class FilterModal extends HTMLElement {
         this.shadow.innerHTML =
             /*html*/`
                 <style>
+                    p{
+                        color: black;
+                        font-size: 25px;
+                        font-family: Arial, Helvetica, sans-serif;
+                    }                    
+                    
                     .filter-modal {
                         display: none;
                         position: fixed;
@@ -39,18 +45,18 @@ class FilterModal extends HTMLElement {
                     }
                     
                     .filter-modal-content{
-                    color: black;
-                    background-color: hsl(240, 74%, 56%);
-                    padding: 20px;
-                    border-radius: 5px;
-                    border: 0.2rem solid white;
-                    box-shadow: 7px 8px 5px black;
-                    max-width: 400px;
-                    width: 30rem;
-                    height: 20rem;
-                    text-align: center;
-                    display: flex;
-                    justify-content: center;
+                        color: black;
+                        background-color: hsl(240, 74%, 56%);
+                        padding: 20px;
+                        border-radius: 5px;
+                        border: 0.2rem solid white;
+                        box-shadow: 7px 8px 5px black;
+                        max-width: 400px;
+                        width: 30rem;
+                        height: 20rem;
+                        text-align: center;
+                        display: flex;
+                        justify-content: center;
                     }
 
                     .filter-form{
@@ -77,7 +83,6 @@ class FilterModal extends HTMLElement {
                         width: 7rem;
                         cursor: pointer;
                         border-radius: 100px;
-                        padding: 0.5rem;
                     }
                     
                     .filter-no{
@@ -99,6 +104,15 @@ class FilterModal extends HTMLElement {
                         background-color: hsl(240, 74%, 56%);
                         flex: 1;
                     }
+
+                    .form-input input{
+                        width: 100%;
+                        background-color: hsl(240, 79%, 68%);
+                        padding: 1rem;
+                        border: 0.2rem solid hsl(214, 86%, 73%);
+                        box-shadow: 7px 8px 5px black;
+                        outline: none;
+                    }                    
                     
                 </style>
                 
@@ -150,12 +164,12 @@ class FilterModal extends HTMLElement {
     }
 
     openModal(){
-        let filterModal = this.shadow.querySelector(".filter-modal");
+        const filterModal = this.shadow.querySelector(".filter-modal");
         filterModal.classList.add("active");
     }
 
     closeModal(){
-        let filterModal = this.shadow.querySelector(".filter-modal");
+        const filterModal = this.shadow.querySelector(".filter-modal");
         filterModal.classList.remove("active");
     }
 }
