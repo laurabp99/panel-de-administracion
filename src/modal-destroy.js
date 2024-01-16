@@ -7,6 +7,8 @@ class Destroy extends HTMLElement {
     connectedCallback() {
         this.render()
 
+        let deleteModal = this.shadow.querySelector(".delete-modal");
+
         document.addEventListener("showModalDestroy", (event => {
             deleteModal.classList.add("active");
         }))
@@ -115,7 +117,7 @@ class Destroy extends HTMLElement {
 
         deleteNo?.addEventListener("click", () => {
             const deleteModal = this.shadow.querySelector(".delete-modal");
-            deleteModal.classList.remove("active");
+            deleteModal.classList.toggle("active");
         });
     
         deleteYes?.addEventListener("click", () => {
