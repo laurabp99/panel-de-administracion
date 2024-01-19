@@ -2,59 +2,58 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('images', {
+    await queryInterface.createTable('api_trackings', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      entity: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      entityId: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      imageConfigurationId: {
-        allowNull: false,
+      customerId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'image_configurations',
+          model: 'customers',
           key: 'id'
         }
       },
-      name: {
+      fingerprint: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      originalFilename: {
+      ip: {
+        type: Sequelize.INTEGER
+      },
+      isRobot: {
+        defaultValue: 0,
+        type: Sequelize.BOOLEAN
+      },
+      resource: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      resizedFilename: {
+      resourceElement: {
+        type: Sequelize.INTEGER
+      },
+      method: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      title: {
+      httpCode: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
-      alt: {
-        allowNull: false,
-        type: Sequelize.STRING
+      method: {
+        type: Sequelize.TEXT
       },
-      languageAlias: {
+      startTime: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.DOUBLE
       },
-      mediaQuery: {
+      endTime: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.DOUBLE
       },
       latencyMS: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -70,12 +69,12 @@ module.exports = {
       }
     })
 
-    await queryInterface.addIndex('images', ['imageConfigurationId'], {
-      name: 'images_imageConfigurationId_fk'
+    await queryInterface.addIndex('api_trackings', ['customerId'], {
+      name: 'api_trackings_customerId_fk'
     })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('images')
+    await queryInterface.dropTable('api_trackings')
   }
 }

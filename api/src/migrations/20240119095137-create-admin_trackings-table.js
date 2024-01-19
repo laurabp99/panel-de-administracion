@@ -2,24 +2,31 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('cities', {
+    await queryInterface.createTable('admin_trackings', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      countryId: {
+      entity: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      entityId: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      action: {
+        type: Sequelize.STRING
+      },
+      userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'countries',
+          model: 'users',
           key: 'id'
         }
-      },
-      name: {
-        allowNull: false,
-        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -34,15 +41,12 @@ module.exports = {
       }
     })
 
-
-    await queryInterface.addIndex('cities', ['countryId'], {
-      name: 'cities_countryId_fk'
+    await queryInterface.addIndex('admin_trackings', ['userId'], {
+      name: 'admin_trackings_userId_fk'
     })
-    
   },
 
-
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('cities')
+    await queryInterface.dropTable('admin_trackings')
   }
 }

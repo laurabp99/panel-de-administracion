@@ -2,23 +2,26 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('cities', {
+    await queryInterface.createTable('locale_seo_slug_redirects', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      countryId: {
+      localeSeoId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'countries',
+          model: 'locale_seos',
           key: 'id'
         }
       },
-      name: {
+      languageAlias: {
         allowNull: false,
+        type: Sequelize.STRING
+      },
+      oldUrl: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -33,16 +36,12 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
-
-
-    await queryInterface.addIndex('cities', ['countryId'], {
-      name: 'cities_countryId_fk'
+    await queryInterface.addIndex('locale_seo_slug_redirects', ['localeSeoId'], {
+      name: 'locale_seo_slug_redirects_localeSeoId_fk'
     })
-    
   },
 
-
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('cities')
+    await queryInterface.dropTable('locale_seo_slug_redirects')
   }
 }

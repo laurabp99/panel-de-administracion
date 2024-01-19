@@ -2,61 +2,60 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('customers', {
+    await queryInterface.createTable('returns', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      countryId: {
+      saleId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'countries',
+          model: 'sales',
           key: 'id'
         }
       },
-      cityId: {
+      customerId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'cities',
+          model: 'customers',
           key: 'id'
         }
       },
-      postalCode: {
+      payment_methodId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'payment_methods',
+          key: 'id'
+        }
+      },
+      reference: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      address: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      name: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      surname: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      telephone: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      email: {
-        allowNull: false,
+      totalPrice: {
         unique: true,
-        type: Sequelize.STRING
+        type: Sequelize.DECIMAL
       },
-      password: {
+      totalBasePrice: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.DECIMAL
       },
-      vat: {
+      totalTaxPrice: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.DECIMAL
+      },
+      returnDate: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      returnTime: {
+        allowNull: false,
+        type: Sequelize.TIME
       },
       createdAt: {
         allowNull: false,
@@ -71,16 +70,20 @@ module.exports = {
       }
     })
 
-    await queryInterface.addIndex('customers', ['countryId'], {
-      name: 'customers_countryId_fk'
+    await queryInterface.addIndex('returns', ['saleId'], {
+      name: 'returns_saleId_fk'
     })
 
-    await queryInterface.addIndex('customers', ['cityId'], {
-      name: 'customers_cityId_fk'
+    await queryInterface.addIndex('returns', ['customerId'], {
+      name: 'returns_customerId_fk'
+    })
+
+    await queryInterface.addIndex('returns', ['payment_methodId'], {
+      name: 'returns_payment_methodId_fk'
     })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('customers')
+    await queryInterface.dropTable('returns')
   }
 }

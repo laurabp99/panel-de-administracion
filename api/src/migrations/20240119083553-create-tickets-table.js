@@ -2,36 +2,42 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('prices', {
+    await queryInterface.createTable('tickets', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      priceId: {
+      customerId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'prices',
+          model: 'customers',
           key: 'id'
         }
       },
-      taxId: {
-        allowNull: false,
+      saleId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'taxes',
+          model: 'sales',
           key: 'id'
         }
       },
-      basePrice: {
-        allowNull: false,
-        type: Sequelize.DECIMAL
+      returnId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'returns',
+          key: 'id'
+        }
       },
-      current: {
-        defaultValue: 1,
-        type: Sequelize.BOOLEAN
+      reference: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      path: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -46,16 +52,20 @@ module.exports = {
       }
     })
 
-    await queryInterface.addIndex('prices', ['priceId'], {
-      name: 'prices_priceId_fk'
+    await queryInterface.addIndex('tickets', ['customerId'], {
+      name: 'tickets_customerId_fk'
     })
 
-    await queryInterface.addIndex('prices', ['taxId'], {
-      name: 'prices_taxId_fk'
+    await queryInterface.addIndex('tickets', ['saleId'], {
+      name: 'tickets_saleId_fk'
+    })
+
+    await queryInterface.addIndex('tickets', ['returnId'], {
+      name: 'tickets_returnId_fk'
     })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('prices')
+    await queryInterface.dropTable('tickets')
   }
 }

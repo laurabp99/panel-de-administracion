@@ -2,24 +2,31 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('cities', {
+    await queryInterface.createTable('email_errors', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      countryId: {
+      customerId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'countries',
+          model: 'customers',
           key: 'id'
         }
       },
-      name: {
+      emailId: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'emails',
+          key: 'id'
+        }
+      },
+      error: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -34,15 +41,16 @@ module.exports = {
       }
     })
 
-
-    await queryInterface.addIndex('cities', ['countryId'], {
-      name: 'cities_countryId_fk'
+    await queryInterface.addIndex('email_errors', ['customerId'], {
+      name: 'email_errors_customerId_fk'
     })
-    
+
+    await queryInterface.addIndex('email_errors', ['emailId'], {
+      name: 'email_errors_emailId_fk'
+    })
   },
 
-
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('cities')
+    await queryInterface.dropTable('email_errors')
   }
 }

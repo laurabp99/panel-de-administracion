@@ -2,61 +2,49 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('customers', {
+    await queryInterface.createTable('sale_errors', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      countryId: {
+      paymentMethodId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'countries',
+          model: 'payment_methods',
           key: 'id'
         }
       },
-      cityId: {
+      customerId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'cities',
+          model: 'customers',
           key: 'id'
         }
       },
-      postalCode: {
+      cartId: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'carts',
+          key: 'id'
+        }
       },
-      address: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      name: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      surname: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      telephone: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      email: {
+
+      reference: {
         allowNull: false,
         unique: true,
         type: Sequelize.STRING
       },
-      password: {
+      errorCode: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.DECIMAL
       },
-      vat: {
-        allowNull: false,
-        type: Sequelize.STRING
+      errorMessage: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -71,16 +59,20 @@ module.exports = {
       }
     })
 
-    await queryInterface.addIndex('customers', ['countryId'], {
-      name: 'customers_countryId_fk'
+    await queryInterface.addIndex('sale_errors', ['paymentMethodId'], {
+      name: 'sale_errors_paymentMethodId_fk'
     })
 
-    await queryInterface.addIndex('customers', ['cityId'], {
-      name: 'customers_cityId_fk'
+    await queryInterface.addIndex('sale_errors', ['customerId'], {
+      name: 'sale_errors_customerId_fk'
+    })
+
+    await queryInterface.addIndex('sale_errors', ['cartId'], {
+      name: 'sale_errors_cartId_fk'
     })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('customers')
+    await queryInterface.dropTable('sale_errors')
   }
 }

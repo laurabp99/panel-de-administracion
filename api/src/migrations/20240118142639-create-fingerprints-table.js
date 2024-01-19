@@ -2,59 +2,47 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('images', {
+    await queryInterface.createTable('fingerprints', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      entity: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      entityId: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      imageConfigurationId: {
-        allowNull: false,
+      customerId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'image_configurations',
+          model: 'customers',
           key: 'id'
         }
       },
-      name: {
+      fingerprint: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      originalFilename: {
-        allowNull: false,
+      cityId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'cities',
+          key: 'id'
+        }
+      },
+      browser: {
         type: Sequelize.STRING
       },
-      resizedFilename: {
-        allowNull: false,
+      browserVersion: {
         type: Sequelize.STRING
       },
-      title: {
-        allowNull: false,
+      os: {
         type: Sequelize.STRING
       },
-      alt: {
-        allowNull: false,
+      osVersion: {
         type: Sequelize.STRING
       },
-      languageAlias: {
-        allowNull: false,
-        type: Sequelize.STRING
+      screenHeight: {
+        type: Sequelize.INTEGER
       },
-      mediaQuery: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      latencyMS: {
-        allowNull: false,
+      screenWidth: {
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -70,12 +58,16 @@ module.exports = {
       }
     })
 
-    await queryInterface.addIndex('images', ['imageConfigurationId'], {
-      name: 'images_imageConfigurationId_fk'
+    await queryInterface.addIndex('fingerprints', ['customerId'], {
+      name: 'fingerprints_customerId_fk'
+    })
+
+    await queryInterface.addIndex('fingerprints', ['cityId'], {
+      name: 'fingerprints_cityId_fk'
     })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('images')
+    await queryInterface.dropTable('fingerprints')
   }
 }

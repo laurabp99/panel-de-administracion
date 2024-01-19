@@ -11,7 +11,11 @@ module.exports = {
       },
       countryId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'countries',
+          key: 'id'
+        }
       },
       dialCode: {
         allowNull: false,
@@ -29,6 +33,11 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
+
+    await queryInterface.addIndex('dial_codes', ['countryId'], {
+      name: 'dial_codes_countryId_fk'
+    })
+    
   },
 
   down: async (queryInterface, Sequelize) => {

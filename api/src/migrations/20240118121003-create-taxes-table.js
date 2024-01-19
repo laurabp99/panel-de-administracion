@@ -11,7 +11,11 @@ module.exports = {
       },
       countryId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'countries',
+          key: 'id'
+        }
       },
       type: {
         allowNull: false,
@@ -40,6 +44,10 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
+    })
+
+    await queryInterface.addIndex('taxes', ['countryId'], {
+      name: 'taxes_countryId_fk'
     })
   },
 

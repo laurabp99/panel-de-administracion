@@ -11,7 +11,11 @@ module.exports = {
       },
       priceId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'prices',
+          key: 'id'
+        }
       },
       percentage: {
         allowNull: false,
@@ -42,6 +46,10 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
+    })
+
+    await queryInterface.addIndex('price_discounts', ['priceId'], {
+      name: 'price_discounts_priceId_fk'
     })
   },
 

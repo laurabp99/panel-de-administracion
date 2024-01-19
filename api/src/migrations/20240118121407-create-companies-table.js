@@ -11,11 +11,19 @@ module.exports = {
       },
       countryId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'countries',
+          key: 'id'
+        }
       },
       dialCodeId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'dial_codes',
+          key: 'id'
+        }
       },
       postalCode: {
         allowNull: false,
@@ -62,6 +70,14 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
+    })
+
+    await queryInterface.addIndex('companies', ['countryId'], {
+      name: 'companies_countryId_fk'
+    })
+
+    await queryInterface.addIndex('companies', ['dialCodeId'], {
+      name: 'companies_dialCodeId_fk'
     })
   },
 
