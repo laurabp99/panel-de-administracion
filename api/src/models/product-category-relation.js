@@ -1,17 +1,17 @@
 module.exports = function (sequelize, DataTypes) {
   const ProductCategoryRelation = sequelize.define('ProductCategoryRelation', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     productId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     productCategoryId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     createdAt: {
@@ -43,12 +43,27 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'product_category_relations_productId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'productId' }
+        ]
+      },
+      {
+        name: 'product_category_relations_productCategoryId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'productCategoryId' }
+        ]
+      },
     ]
   })
 
   ProductCategoryRelation.associate = function (models) {
-
+    ProductCategoryRelation.belongsTo(models.Product, { as: 'product', foreignKey: 'productId' })
+    ProductCategoryRelation.belongsTo(models.ProductCategory, { as: 'productCategory', foreignKey: 'productCategoryId' })
   }
 
   return ProductCategoryRelation

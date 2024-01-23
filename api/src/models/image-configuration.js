@@ -1,28 +1,28 @@
 module.exports = function (sequelize, DataTypes) {
   const ImageConfiguration = sequelize.define('ImageConfiguration', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     entity: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     mediaQuery: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     widthPx: {
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     heightPx: {
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -53,7 +53,16 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'image_configurations_entity_name_mediaQuery_index',
+        using: 'BTREE',
+        fields: [
+          { name: 'entity' },
+          { name: 'name' },
+          { name: 'mediaQuery' },
+        ]
+      },
     ]
   })
 

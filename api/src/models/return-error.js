@@ -1,29 +1,29 @@
 module.exports = function (sequelize, DataTypes) {
   const ReturnError = sequelize.define('ReturnError', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     customerId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     returnId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     paymentMethodId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     errorCode: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     errorMessage: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -54,12 +54,35 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'return_errors_customerId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'customerId' }
+        ]
+      },
+      {
+        name: 'return_errors_returnId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'returnId' }
+        ]
+      },
+      {
+        name: 'return_errors_paymentMethodId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'paymentMethodId' }
+        ]
+      },
     ]
   })
 
   ReturnError.associate = function (models) {
-
+    ReturnError.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
+    ReturnError.belongsTo(models.Return, { as: 'return', foreignKey: 'returnId' })
+    ReturnError.belongsTo(models.PaymentMethod, { as: 'paymentMethod', foreignKey: 'paymentMethodId' })
   }
 
   return ReturnError

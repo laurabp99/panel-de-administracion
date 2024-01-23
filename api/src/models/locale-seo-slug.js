@@ -1,43 +1,43 @@
 module.exports = function (sequelize, DataTypes) {
   const LocaleSeoSlug = sequelize.define('LocaleSeoSlug', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     localeSeoId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     languageAlias: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     relParent: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     slug: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     key: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     parentSlug: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     title: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     description: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     keywords: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -68,12 +68,19 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'locale_seo_slugs_localeSeoId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'localeSeoId' }
+        ]
+      },
     ]
   })
 
   LocaleSeoSlug.associate = function (models) {
-
+    LocaleSeoSlug.belongsTo(models.LocaleSeo, { as: 'localeSeo', foreignKey: 'localeSeoId' })
   }
 
   return LocaleSeoSlug

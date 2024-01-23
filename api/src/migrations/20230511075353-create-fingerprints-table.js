@@ -70,6 +70,10 @@ module.exports = {
       }
     })
 
+    Fingerprint.associate = function (models) {
+      Fingerprint.hasMany(models.ApiTracking, { as: 'apiTrackings', foreignKey: 'fingerprintId' })
+    }
+
     await queryInterface.addIndex('fingerprints', ['customerId'], {
       name: 'fingerprints_customerId_fk'
     })

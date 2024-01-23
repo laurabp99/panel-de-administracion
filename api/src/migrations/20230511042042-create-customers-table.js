@@ -82,8 +82,12 @@ module.exports = {
       }
     })
 
+    Customer.associate = function (models) {
+      Customer.hasMany(models.ApiTracking, { as: 'apiTrackings', foreignKey: 'customerId' })
+    }
+
     await queryInterface.addIndex('customers', ['email'], {
-      name: 'customer_email_index'
+      name: 'customers_email_index'
     })
 
     await queryInterface.addIndex('customers', ['countryId'], {

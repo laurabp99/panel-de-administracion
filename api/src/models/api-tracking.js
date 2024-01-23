@@ -1,54 +1,54 @@
 module.exports = function (sequelize, DataTypes) {
   const ApiTracking = sequelize.define('ApiTracking', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     customerId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     fingerprintId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     ip: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     isRobot: {
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       allowNull: false
     },
     resource: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     resourceElement: {
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     method: {
       allowNull: false,
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     httpCode: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     message: {
-      type: Sequelize.TEXT,
+      type: DataTypes.TEXT,
       allowNull: true
     },
     startTime: {
-      type: Sequelize.DOUBLE,
+      type: DataTypes.DOUBLE,
       allowNull: false
     },
     endTime: {
-      type: Sequelize.DOUBLE,
+      type: DataTypes.DOUBLE,
       allowNull: false
     },
     latencyMS: {
-      type: Sequelize.DOUBLE,
+      type: DataTypes.DOUBLE,
       allowNull: false
     },
     createdAt: {
@@ -80,12 +80,27 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'api_trackings_customerId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'customerId' }
+        ]
+      },
+      {
+        name: 'api_trackings_fingerprintId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'fingerprintId' }
+        ]
+      },
     ]
   })
 
   ApiTracking.associate = function (models) {
-
+    ApiTracking.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
+    ApiTracking.belongsTo(models.Fingerprint, { as: 'fingerprint', foreignKey: 'fingerprintId' })
   }
 
   return ApiTracking

@@ -1,44 +1,44 @@
 module.exports = function (sequelize, DataTypes) {
   const Fingerprint = sequelize.define('Fingerprint', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     customerId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     cityId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     fingerprint: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     browser: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     browserVersion: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     os: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     osVersion: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     screenHeight: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     screenWidth: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     createdAt: {
@@ -70,12 +70,27 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'fingerprints_customerId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'customerId' }
+        ]
+      },
+      {
+        name: 'fingerprints_cityId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'cityId' }
+        ]
+      },
     ]
   })
 
   Fingerprint.associate = function (models) {
-
+    Fingerprint.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
+    Fingerprint.belongsTo(models.City, { as: 'city', foreignKey: 'cityId' })
   }
 
   return Fingerprint

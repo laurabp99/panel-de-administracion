@@ -1,29 +1,29 @@
 module.exports = function (sequelize, DataTypes) {
   const Ticket = sequelize.define('Ticket', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     customerId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     saleId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     returnId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     reference: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     path: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     createdAt: {
@@ -55,12 +55,35 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'tickets_customerId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'customerId' }
+        ]
+      },
+      {
+        name: 'tickets_saleId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'saleId' }
+        ]
+      },
+      {
+        name: 'tickets_returnId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'returnId' }
+        ]
+      },
     ]
   })
 
   Ticket.associate = function (models) {
-
+    Ticket.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
+    Ticket.belongsTo(models.Sale, { as: 'sale', foreignKey: 'saleId' })
+    Ticket.belongsTo(models.Return, { as: 'return', foreignKey: 'returnId' })
   }
 
   return Ticket

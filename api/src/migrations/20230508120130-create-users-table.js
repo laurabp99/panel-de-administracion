@@ -36,6 +36,10 @@ module.exports = {
       }
     })
 
+    User.associate = function (models) {
+      User.hasMany(models.AdminTracking, { as: 'adminTrackings', foreignKey: 'userId' })
+    }
+
     await queryInterface.addIndex('users', ['email'], {
       name: 'users_email_index'
     })
@@ -44,4 +48,5 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('users')
   }
+  
 }

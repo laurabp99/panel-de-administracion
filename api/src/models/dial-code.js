@@ -1,17 +1,17 @@
 module.exports = function (sequelize, DataTypes) {
   const DialCode = sequelize.define('DialCode', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     countryId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     dialCode: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     createdAt: {
@@ -43,12 +43,19 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'dial_codes_countryId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'countryId' }
+        ]
+      },
     ]
   })
 
   DialCode.associate = function (models) {
-
+    DialCode.belongsTo(models.Country, { as: 'country', foreignKey: 'countryId' })
   }
 
   return DialCode

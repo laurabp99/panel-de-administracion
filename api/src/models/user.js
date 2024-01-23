@@ -11,12 +11,12 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
     },
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
     password: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     createdAt: {
@@ -48,7 +48,15 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'users_email_index',
+        using: 'BTREE',
+        unique: true,
+        fields: [
+          { name: 'email' }
+        ]
+      },
     ]
   })
 

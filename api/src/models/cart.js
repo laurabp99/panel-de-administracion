@@ -1,21 +1,21 @@
 module.exports = function (sequelize, DataTypes) {
   const Cart = sequelize.define('Cart', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     uuid: {
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       allowNull: false,
-      defaultValue: Sequelize.UUIDV4
+      defaultValue: DataTypes.UUIDV4
     },
     customerId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     fingerprintId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -46,12 +46,27 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'carts_customerId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'customerId' }
+        ]
+      },
+      {
+        name: 'carts_fingerprintId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'fingerprintId' }
+        ]
+      },
     ]
   })
 
   Cart.associate = function (models) {
-
+    Cart.belongsTo(models.Customer, { as: 'customer', foreignKey: 'userId' })
+    Cart.belongsTo(models.Fingerprint, { as: 'fingerprint', foreignKey: 'fingerprintId' })
   }
 
   return Cart

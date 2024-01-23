@@ -1,14 +1,16 @@
 module.exports = function (sequelize, DataTypes) {
-  const MenuItem = sequelize.define('MenuItem', {
+  const PageTracking = sequelize.define('PageTracking', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
-    menuId: {
+    customerId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+    },
+    fingerprintId: {
+      type: DataTypes.INTEGER,
     },
     localeSeoId: {
       type: DataTypes.INTEGER,
@@ -16,26 +18,29 @@ module.exports = function (sequelize, DataTypes) {
     localeSeoSlugId: {
       type: DataTypes.INTEGER,
     },
-    parent: {
-      type: DataTypes.INTEGER
-    },
-    name: {
+    path: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    description: {
-      type: DataTypes.STRING
+    ip: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
-    customUrl: {
-      type: DataTypes.STRING
-    },
-    private: {
+    isRobot: {
       type: DataTypes.BOOLEAN,
       allowNull: false
     },
-    order: {
+    startTime: {
+      type: DataTypes.DOUBLE,
+      allowNull: false
+    },
+    endTime: {
+      type: DataTypes.DOUBLE,
+      allowNull: false
+    },
+    latencyMS: {
       type: DataTypes.INTEGER,
-      defaultValue: 0
+      allowNull: false
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -55,7 +60,7 @@ module.exports = function (sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'menu_items',
+    tableName: 'page_trackings',
     timestamps: true,
     paranoid: true,
     indexes: [
@@ -68,21 +73,28 @@ module.exports = function (sequelize, DataTypes) {
         ]
       },
       {
-        name: 'menu_items_menuId_fk',
+        name: 'page_trackings_customerId_fk',
         using: 'BTREE',
         fields: [
-          { name: 'menuId' }
+          { name: 'customerId' }
         ]
       },
       {
-        name: 'menu_items_localeSeoId_fk',
+        name: 'page_trackings_fingerprintId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'fingerprintId' }
+        ]
+      },
+      {
+        name: 'page_trackings_localeSeoId_fk',
         using: 'BTREE',
         fields: [
           { name: 'localeSeoId' }
         ]
       },
       {
-        name: 'menu_items_localeSeoSlugId_fk',
+        name: 'page_trackings_localeSeoSlugId_fk',
         using: 'BTREE',
         fields: [
           { name: 'localeSeoSlugId' }
@@ -91,11 +103,12 @@ module.exports = function (sequelize, DataTypes) {
     ]
   })
 
-  MenuItem.associate = function (models) {
-    MenuItem.belongsTo(models.Menu, { as: 'menu', foreignKey: 'menuId' })
-    MenuItem.belongsTo(models.LocaleSeo, { as: 'localeSeo', foreignKey: 'localeSeoId' })
-    MenuItem.belongsTo(models.LocaleSeoSlug, { as: 'localeSeoSlug', foreignKey: 'localeSeoSlugId' })
+  PageTracking.associate = function (models) {
+    PageTracking.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
+    PageTracking.belongsTo(models.Fingerprint, { as: 'fingerprint', foreignKey: 'fingerprintId' })
+    PageTracking.belongsTo(models.LocaleSeo, { as: 'localeSeo', foreignKey: 'localeSeoId' })
+    PageTracking.belongsTo(models.LocaleSeoSlug, { as: 'localeSeoSlug', foreignKey: 'localeSeoSlugId' })
   }
 
-  return MenuItem
+  return PageTracking
 }

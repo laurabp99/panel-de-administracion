@@ -32,6 +32,10 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
+
+    Product.associate = function (models) {
+      Product.hasMany(models.CartDetail, { as: 'cartDetails', foreignKey: 'productId' })
+    }
   },
 
   down: async (queryInterface, Sequelize) => {

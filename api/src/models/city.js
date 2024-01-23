@@ -1,17 +1,17 @@
 module.exports = function (sequelize, DataTypes) {
   const City = sequelize.define('City', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     countryId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     createdAt: {
@@ -43,11 +43,19 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'cities_countryId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'countryId' }
+        ]
+      },
     ]
   })
 
   City.associate = function (models) {
+    City.belongsTo(models.Country, { as: 'country', foreignKey: 'countryId' })
 
   }
 

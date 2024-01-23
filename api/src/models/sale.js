@@ -1,45 +1,45 @@
 module.exports = function (sequelize, DataTypes) {
   const Sale = sequelize.define('Sale', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     cartId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     customerId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     paymentMethodId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     couponId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     reference: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     totalPrice: {
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false
     },
     totalBasePrice: {
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false
     },
     totalTaxPrice: {
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false
     },
     saleDate: {
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
       allowNull: false
     },
     saleTime: {
-      type: Sequelize.TIME,
+      type: DataTypes.TIME,
       allowNull: false
     },
     createdAt: {
@@ -71,12 +71,43 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'sales_cartId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'cartId' }
+        ]
+      },
+      {
+        name: 'sales_customerId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'customerId' }
+        ]
+      },
+      {
+        name: 'sales_paymentMethodId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'paymentMethodId' }
+        ]
+      },
+      {
+        name: 'sales_couponId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'couponId' }
+        ]
+      },
     ]
   })
 
   Sale.associate = function (models) {
-
+    Sale.belongsTo(models.Cart, { as: 'cart', foreignKey: 'cartId' })
+    Sale.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
+    Sale.belongsTo(models.PaymentMethod, { as: 'paymentMethod', foreignKey: 'paymentMethodId' })
+    Sale.belongsTo(models.Coupon, { as: 'coupon', foreignKey: 'couponId' })
   }
 
   return Sale

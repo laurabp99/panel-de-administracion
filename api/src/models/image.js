@@ -1,47 +1,47 @@
 module.exports = function (sequelize, DataTypes) {
   const Image = sequelize.define('Image', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     imageConfigurationId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     entityId: {
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     entity: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     name: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     originalFilename: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     resizedFilename: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     title: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     alt: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     languageAlias: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     mediaQuery: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     latencyMs: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     createdAt: {
@@ -73,12 +73,28 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'images_imageConfigurationId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'localeSeoSlugId' }
+        ]
+      },
+      {
+        name: 'images_entityId_entity_mediaQuery_index',
+        using: 'BTREE',
+        fields: [
+          { name: 'entityId' },
+          { name: 'entity' },
+          { name: 'mediaQuery' },
+        ]
+      },
     ]
   })
 
   Image.associate = function (models) {
-
+    Image.belongsTo(models.ImageConfiguration, { as: 'imageConfiguration', foreignKey: 'imageConfigurationId' })
   }
 
   return Image

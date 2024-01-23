@@ -1,20 +1,20 @@
 module.exports = function (sequelize, DataTypes) {
   const Product = sequelize.define('Product', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     featured: {
-      type: Sequelize.BOOLEAN
+      type: DataTypes.BOOLEAN
     },
     visible: {
-      type: Sequelize.BOOLEAN
+      type: DataTypes.BOOLEAN
     },
     createdAt: {
       type: DataTypes.DATE,

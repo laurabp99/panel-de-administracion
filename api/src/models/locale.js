@@ -1,29 +1,29 @@
 module.exports = function (sequelize, DataTypes) {
   const Locale = sequelize.define('Locale', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     languageAlias: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     entity: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     entityId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     key: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     value: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     createdAt: {
@@ -55,7 +55,17 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'locales_languageAlias_entity_entityId_key_index',
+        using: 'BTREE',
+        fields: [
+          { name: 'languageAlias' },
+          { name: 'entity' },
+          { name: 'entityId' },
+          { name: 'key' },
+        ]
+      },
     ]
   })
 

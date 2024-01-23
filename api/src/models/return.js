@@ -1,45 +1,45 @@
 module.exports = function (sequelize, DataTypes) {
   const Return = sequelize.define('Return', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     saleId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     customerId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     paymentMethodId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     reference: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     totalPrice: {
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false
     },
     totalBasePrice: {
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false
     },
     totalTaxPrice: {
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false
     },
     returnDate: {
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
       allowNull: false
     },
     returnTime: {
-      type: Sequelize.TIME,
+      type: DataTypes.TIME,
       allowNull: false
     },
     createdAt: {
@@ -71,12 +71,35 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'returns_saleId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'saleId' }
+        ]
+      },
+      {
+        name: 'returns_customerId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'customerId' }
+        ]
+      },
+      {
+        name: 'returns_paymentMethodId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'paymentMethodId' }
+        ]
+      },
     ]
   })
 
   Return.associate = function (models) {
-
+    Return.belongsTo(models.Sale, { as: 'sale', foreignKey: 'saleId' })
+    Return.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
+    Return.belongsTo(models.PaymentMethod, { as: 'paymentMethod', foreignKey: 'paymentMethodId' })
   }
 
   return Return

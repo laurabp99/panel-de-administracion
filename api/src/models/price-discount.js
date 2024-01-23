@@ -1,29 +1,29 @@
 module.exports = function (sequelize, DataTypes) {
   const PriceDiscount = sequelize.define('PriceDiscount', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     priceId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     percentage: {
-      type: Sequelize.DECIMAL
+      type: DataTypes.DECIMAL
     },
     multiplier: {
-      type: Sequelize.DECIMAL
+      type: DataTypes.DECIMAL
     },
     current: {
-      type: Sequelize.BOOLEAN
+      type: DataTypes.BOOLEAN
     },
     startsAt: {
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     endsAt: {
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -54,12 +54,19 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'price_discounts_priceId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'priceId' }
+        ]
+      },
     ]
   })
 
   PriceDiscount.associate = function (models) {
-
+    PriceDiscount.belongsTo(models.Price, { as: 'price', foreignKey: 'priceId' })
   }
 
   return PriceDiscount

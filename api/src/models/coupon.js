@@ -1,30 +1,30 @@
 module.exports = function (sequelize, DataTypes) {
   const Coupon = sequelize.define('Coupon', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     code: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     percentage: {
-      type: Sequelize.DECIMAL
+      type: DataTypes.DECIMAL
     },
     multiplier: {
-      type: Sequelize.DECIMAL
+      type: DataTypes.DECIMAL
     },
     startsAt: {
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     endsAt: {
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     createdAt: {
       type: DataTypes.DATE,

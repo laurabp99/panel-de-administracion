@@ -1,21 +1,21 @@
 module.exports = function (sequelize, DataTypes) {
   const EmailError = sequelize.define('EmailError', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     customerId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     emailId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     error: {
-      type: Sequelize.TEXT,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     createdAt: {
@@ -47,12 +47,27 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'email_errors_customerId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'customerId' }
+        ]
+      },
+      {
+        name: 'email_errors_emailId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'emailId' }
+        ]
+      },
     ]
   })
 
   EmailError.associate = function (models) {
-
+    EmailError.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
+    EmailError.belongsTo(models.Email, { as: 'email', foreignKey: 'emailId' })
   }
 
   return EmailError

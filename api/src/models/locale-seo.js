@@ -1,42 +1,42 @@
 module.exports = function (sequelize, DataTypes) {
   const LocaleSeo = sequelize.define('LocaleSeo', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     languageAlias: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     url: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     title: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     description: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     redirection: {
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: 0
     },
     menu: {
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: 1
     },
     changeFrequency: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     priority: {
-      type: Sequelize.DECIMAL
+      type: DataTypes.DECIMAL
     },
     sitemap: {
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: 1
     },
     createdAt: {

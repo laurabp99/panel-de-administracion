@@ -1,50 +1,50 @@
 module.exports = function (sequelize, DataTypes) {
   const Customer = sequelize.define('Customer', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     countryId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     cityId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     dialCodeId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     surname: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     telephone: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
     postalCode: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     address: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     password: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     createdAt: {
@@ -76,12 +76,43 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
+      },
+      {
+        name: 'customers_email_index',
+        using: 'BTREE',
+        unique: true,
+        fields: [
+          { name: 'email' }
+        ]
+      },
+      {
+        name: 'customers_countryId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'countryId' }
+        ]
+      },
+      {
+        name: 'companies_cityId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'cityId' }
+        ]
+      },
+      {
+        name: 'customers_dialCodeId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'dialCodeId' }
+        ]
       }
     ]
   })
 
   Customer.associate = function (models) {
-
+    Customer.belongsTo(models.Country, { as: 'country', foreignKey: 'countryId' })
+    Customer.belongsTo(models.City, { as: 'city', foreignKey: 'cityId' })
+    Customer.belongsTo(models.DialCode, { as: 'dialCode', foreignKey: 'dialCodeId' })
   }
 
   return Customer

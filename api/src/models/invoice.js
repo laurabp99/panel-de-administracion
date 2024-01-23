@@ -1,28 +1,28 @@
 module.exports = function (sequelize, DataTypes) {
   const Invoice = sequelize.define('Invoice', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
     },
     customerId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     saleId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     returnId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     reference: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     path: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     createdAt: {
@@ -54,12 +54,35 @@ module.exports = function (sequelize, DataTypes) {
         fields: [
           { name: 'id' }
         ]
-      }
+      },
+      {
+        name: 'invoices_customerId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'customerId' }
+        ]
+      },
+      {
+        name: 'invoices_saleId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'saleId' }
+        ]
+      },
+      {
+        name: 'invoices_returnId_fk',
+        using: 'BTREE',
+        fields: [
+          { name: 'returnId' }
+        ]
+      },
     ]
   })
 
   Invoice.associate = function (models) {
-
+    Invoice.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
+    Invoice.belongsTo(models.Sale, { as: 'sale', foreignKey: 'saleId' })
+    Invoice.belongsTo(models.Return, { as: 'return', foreignKey: 'returnId' })
   }
 
   return Invoice
