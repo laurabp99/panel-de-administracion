@@ -49,6 +49,13 @@ module.exports = {
       }
     })
 
+    Tax.associate = function (models) {
+      Tax.hasMany(models.CartDetail, { as: 'cartDetails', foreignKey: 'taxId' })
+      Tax.hasMany(models.Price, { as: 'prices', foreignKey: 'taxId' })
+      Tax.hasMany(models.ReturnDetail, { as: 'returnDetails', foreignKey: 'taxId' })
+      Tax.hasMany(models.SaleDetail, { as: 'saleDetails', foreignKey: 'taxId' })
+    }
+
     await queryInterface.addIndex('taxes', ['countryId'], {
       name: 'taxes_countryId_fk'
     })

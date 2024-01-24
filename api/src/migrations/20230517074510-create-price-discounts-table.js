@@ -48,6 +48,12 @@ module.exports = {
       }
     })
 
+    PriceDiscount.associate = function (models) {
+      PriceDiscount.hasMany(models.CartDetail, { as: 'cartDetails', foreignKey: 'priceDiscountId' })
+      PriceDiscount.hasMany(models.ReturnDetail, { as: 'returnDetails', foreignKey: 'priceDiscountId' })
+      PriceDiscount.hasMany(models.SaleDetail, { as: 'saleDetails', foreignKey: 'priceDiscountId' })
+    }
+
     await queryInterface.addIndex('price_discounts', ['priceId'], {
       name: 'price_discounts_priceId_fk'
     })

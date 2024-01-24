@@ -26,6 +26,10 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
+
+    Menu.associate = function (models) {
+      Menu.hasMany(models.MenuItem, { as: 'menuItems', foreignKey: 'menuId' })
+    }
   },
 
   down: async (queryInterface, Sequelize) => {

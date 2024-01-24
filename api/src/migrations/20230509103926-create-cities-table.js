@@ -37,6 +37,12 @@ module.exports = {
       }
     })
 
+    City.associate = function (models) {
+      City.hasMany(models.Company, { as: 'companies', foreignKey: 'cityId' })
+      City.hasMany(models.Customer, { as: 'customers', foreignKey: 'cityId' })
+      City.hasMany(models.Fingerprint, { as: 'fingerprints', foreignKey: 'cityId' })
+    }
+
     await queryInterface.addIndex('cities', ['countryId'], {
       name: 'cities_countryId_fk'
     })

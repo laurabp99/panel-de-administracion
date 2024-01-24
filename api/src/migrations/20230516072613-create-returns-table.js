@@ -88,6 +88,13 @@ module.exports = {
     await queryInterface.addIndex('returns', ['paymentMethodId'], {
       name: 'returns_paymentMethodId_fk'
     })
+
+    Return.associate = function (models) {
+      Return.hasMany(models.Invoice, { as: 'invoices', foreignKey: 'returnId' })
+      Return.hasMany(models.ReturnDetail, { as: 'returnDetails', foreignKey: 'returnId' })
+      Return.hasMany(models.ReturnError, { as: 'returnErrors', foreignKey: 'returnId' })
+      Return.hasMany(models.Ticket, { as: 'tickets', foreignKey: 'returnId' })
+    }
   },
 
   down: async (queryInterface, Sequelize) => {

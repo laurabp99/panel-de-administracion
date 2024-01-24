@@ -30,6 +30,10 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
+
+    Product.associate = function (models) {
+      Product.hasMany(models.ProductCategoryRelation, { as: 'productCategoryRelation', foreignKey: 'productCategoryId' })
+    }
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('product_categories')

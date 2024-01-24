@@ -98,6 +98,13 @@ module.exports = {
     await queryInterface.addIndex('sales', ['couponId'], {
       name: 'sales_couponId_fk'
     })
+
+    Sale.associate = function (models) {
+      Sale.hasMany(models.Invoice, { as: 'invoices', foreignKey: 'saleId' })
+      Sale.hasMany(models.Return, { as: 'returns', foreignKey: 'saleId' })
+      Sale.hasMany(models.SaleDetail, { as: 'saleDetails', foreignKey: 'saleId' })
+      Sale.hasMany(models.Ticket, { as: 'tickets', foreignKey: 'saleId' })
+    }
   },
 
   down: async (queryInterface, Sequelize) => {

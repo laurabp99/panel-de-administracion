@@ -62,6 +62,13 @@ module.exports = {
       }
     })
 
+    LocaleSeoSlug.associate = function (models) {
+      LocaleSeoSlug.hasMany(models.CustomerTracking, { as: 'customerTrackings', foreignKey: 'localeSeoSlugId' })
+      LocaleSeoSlug.hasMany(models.LocaleSeoSlugRedirect, { as: 'localeSeoSlugRedirects', foreignKey: 'localeSeoSlugId' })
+      LocaleSeoSlug.hasMany(models.MenuItem, { as: 'menuItems', foreignKey: 'localeSeoSlugId' })
+      LocaleSeoSlug.hasMany(models.PageTracking, { as: 'pageTrackings', foreignKey: 'localeSeoSlugId' })
+    }
+
     await queryInterface.addIndex('locale_seo_slugs', ['localeSeoId'], {
       name: 'locale_seo_slugs_localeSeoId_fk'
     })

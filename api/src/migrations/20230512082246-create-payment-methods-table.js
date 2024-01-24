@@ -35,6 +35,13 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
+
+    PaymentMethod.associate = function (models) {
+      PaymentMethod.hasMany(models.ReturnError, { as: 'returnErrors', foreignKey: 'paymentMethodId' })
+      PaymentMethod.hasMany(models.Return, { as: 'returns', foreignKey: 'paymentMethodId' })
+      PaymentMethod.hasMany(models.SaleError, { as: 'saleErrors', foreignKey: 'paymentMethodId' })
+      PaymentMethod.hasMany(models.Sale, { as: 'sales', foreignKey: 'paymentMethodId' })
+    }
   },
 
   down: async (queryInterface, Sequelize) => {

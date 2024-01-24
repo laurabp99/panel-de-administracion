@@ -27,8 +27,7 @@ module.exports = {
         allowNull: false
       },
       value: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.TEXT,
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -42,6 +41,12 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
+
+    Locale.associate = function (models) {
+      Locale.hasMany(models.CartDetail, { as: 'cartDetails', foreignKey: 'localeId' })
+      Locale.hasMany(models.ReturnDetail, { as: 'returnDetails', foreignKey: 'localeId' })
+      Locale.hasMany(models.SaleDetail, { as: 'saleDetails', foreignKey: 'localeId' })
+    }
 
     await queryInterface.addIndex('locales', ['languageAlias', 'entity', 'entityId', 'key'], {
       name: 'locales_languageAlias_entity_entityId_key_index'

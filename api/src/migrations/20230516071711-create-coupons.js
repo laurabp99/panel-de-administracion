@@ -42,6 +42,10 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
+
+    Coupon.associate = function (models) {
+      Coupon.hasMany(models.Sale, { as: 'sales', foreignKey: 'couponId' })
+    }
   },
 
   down: async (queryInterface, Sequelize) => {

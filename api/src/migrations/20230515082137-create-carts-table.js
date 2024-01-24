@@ -48,6 +48,8 @@ module.exports = {
 
     Cart.associate = function (models) {
       Cart.hasMany(models.CartDetail, { as: 'cartDetails', foreignKey: 'cartId' })
+      Cart.hasMany(models.SaleError, { as: 'saleErrors', foreignKey: 'cartId' })
+      Cart.hasMany(models.Sale, { as: 'sales', foreignKey: 'cartId' })
     }
 
     await queryInterface.addIndex('carts', ['customerId'], {

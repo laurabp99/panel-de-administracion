@@ -37,6 +37,11 @@ module.exports = {
       }
     })
 
+    DialCode.associate = function (models) {
+      DialCode.hasMany(models.Company, { as: 'companies', foreignKey: 'dialCodeId' })
+      DialCode.hasMany(models.Customer, { as: 'customers', foreignKey: 'dialCodeId' })
+    }
+
     await queryInterface.addIndex('dial_codes', ['countryId'], {
       name: 'dial_codes_countryId_fk'
     })
