@@ -8,19 +8,31 @@ module.exports = function (sequelize, DataTypes) {
     },
     languageAlias: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "LanguageAlias".'
+      }
     },
     entity: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Entity".'
+      }
     },
     entityId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "EntityId".'
+      }
     },
     key: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Key".'
+      }
     },
     value: {
       type: DataTypes.TEXT,

@@ -11,7 +11,10 @@ module.exports = function (sequelize, DataTypes) {
     },
     languageAlias: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "LanguageAlias".'
+      }
     },
     group: {
       type: DataTypes.STRING

@@ -8,7 +8,10 @@ module.exports = function (sequelize, DataTypes) {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Name".'
+      }
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -44,7 +47,8 @@ module.exports = function (sequelize, DataTypes) {
   })
 
   Menu.associate = function (models) {
-
+    Menu.belongsToMany(models.LocaleSeo, { through: models.MenuItem, as: 'localeSeos', foreignKey: 'menuId' })
+    Menu.belongsToMany(models.LocaleSeoSlug, { through: models.MenuItem, as: 'localeSeoSlugs', foreignKey: 'menuId' })
   }
 
   return Menu

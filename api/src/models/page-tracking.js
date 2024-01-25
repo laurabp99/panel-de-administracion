@@ -20,27 +20,45 @@ module.exports = function (sequelize, DataTypes) {
     },
     path: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Path".'
+      }
     },
     ip: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Ip".'
+      }
     },
     isRobot: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "IsRobot".'
+      }
     },
     startTime: {
       type: DataTypes.DOUBLE,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "StartTime".'
+      }
     },
     endTime: {
       type: DataTypes.DOUBLE,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "EndTime".'
+      }
     },
     latencyMS: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "LatencyMS".'
+      }
     },
     createdAt: {
       type: DataTypes.DATE,

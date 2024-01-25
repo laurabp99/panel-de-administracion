@@ -8,11 +8,17 @@ module.exports = function (sequelize, DataTypes) {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Name".'
+      }
     },
     baseUrl: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "BaseUrl".'
+      }
     },
     createdAt: {
       type: DataTypes.DATE,

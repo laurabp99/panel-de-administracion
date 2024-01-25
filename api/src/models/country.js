@@ -8,20 +8,32 @@ module.exports = function (sequelize, DataTypes) {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Name".'
+      }
     },
     iso2: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Iso2".'
+      }
     },
     iso3: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Iso3".'
+      }
     },
     visible: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: true
+      defaultValue: true,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Visible".'
+      }
     },
     createdAt: {
       type: DataTypes.DATE,

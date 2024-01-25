@@ -14,26 +14,41 @@ module.exports = function (sequelize, DataTypes) {
     },
     ip: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Ip".'
+      }
     },
     isRobot: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "isRobot".'
+      }
     },
     resource: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Resource".'
+      }
     },
     resourceElement: {
       type: DataTypes.INTEGER
     },
     method: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Method".'
+      }
     },
     httpCode: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "HttpCode".'
+      }
     },
     message: {
       type: DataTypes.TEXT,
@@ -41,11 +56,17 @@ module.exports = function (sequelize, DataTypes) {
     },
     startTime: {
       type: DataTypes.DOUBLE,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "StartTime".'
+      }
     },
     endTime: {
       type: DataTypes.DOUBLE,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "EndTime".'
+      }
     },
     latencyMS: {
       type: DataTypes.DOUBLE,

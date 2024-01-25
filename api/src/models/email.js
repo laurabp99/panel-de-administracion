@@ -8,11 +8,17 @@ module.exports = function (sequelize, DataTypes) {
     },
     subject: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Subject".'
+      }
     },
     path: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Path".'
+      }
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -48,7 +54,7 @@ module.exports = function (sequelize, DataTypes) {
   })
 
   Email.associate = function (models) {
-
+    Email.belongsToMany(models.Customer, { through: models.SentEmail, as: 'customers', foreignKey: 'emailId' })
   }
 
   return Email

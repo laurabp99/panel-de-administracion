@@ -8,7 +8,10 @@ module.exports = function (sequelize, DataTypes) {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Name".'
+      }
     },
     featured: {
       type: DataTypes.BOOLEAN
@@ -50,7 +53,7 @@ module.exports = function (sequelize, DataTypes) {
   })
 
   Product.associate = function (models) {
-
+    Product.belongsToMany(models.ProductCategory, { through: models.ProductCategoryRelation, as: 'categories', foreignKey: 'productId' })
   }
 
   return Product

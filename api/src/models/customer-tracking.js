@@ -29,7 +29,10 @@ module.exports = function (sequelize, DataTypes) {
     },
     event: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Event".'
+      }
     },
     createdAt: {
       type: DataTypes.DATE,

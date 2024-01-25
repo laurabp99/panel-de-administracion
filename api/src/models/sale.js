@@ -24,23 +24,38 @@ module.exports = function (sequelize, DataTypes) {
     },
     totalPrice: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "TotalPrice".'
+      }
     },
     totalBasePrice: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "TotalBasePrice".'
+      }
     },
     totalTaxPrice: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "TotalTaxPrice".'
+      }
     },
     saleDate: {
       type: DataTypes.DATEONLY,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "SaleDate".'
+      }
     },
     saleTime: {
       type: DataTypes.TIME,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "SaleTime".'
+      }
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -108,6 +123,7 @@ module.exports = function (sequelize, DataTypes) {
     Sale.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
     Sale.belongsTo(models.PaymentMethod, { as: 'paymentMethod', foreignKey: 'paymentMethodId' })
     Sale.belongsTo(models.Coupon, { as: 'coupon', foreignKey: 'couponId' })
+    Sale.belongsToMany(models.Product, { through: models.SaleDetail, as: 'products', foreignKey: 'saleId' })
   }
 
   return Sale

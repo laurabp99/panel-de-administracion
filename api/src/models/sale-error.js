@@ -9,18 +9,30 @@ module.exports = function (sequelize, DataTypes) {
     paymentMethodId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "PaymentMethodId".'
+      }
     },
     customerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "CustomerId".'
+      }
     },
     cartId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "CartId".'
+      }
     },
     errorCode: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "errorCode".'
+      }
     },
     errorMessage: {
       type: DataTypes.STRING

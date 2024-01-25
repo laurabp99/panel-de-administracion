@@ -9,13 +9,19 @@ module.exports = function (sequelize, DataTypes) {
     imageConfigurationId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "ImageConfigurationId".'
+      }
     },
     entityId: {
       type: DataTypes.INTEGER
     },
     entity: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Entity".'
+      }
     },
     name: {
       type: DataTypes.STRING
@@ -34,15 +40,24 @@ module.exports = function (sequelize, DataTypes) {
     },
     languageAlias: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "languageAlias".'
+      }
     },
     mediaQuery: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "MediaQuery".'
+      }
     },
     latencyMs: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "LatencyMs".'
+      }
     },
     createdAt: {
       type: DataTypes.DATE,

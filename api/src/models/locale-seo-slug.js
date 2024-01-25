@@ -9,29 +9,47 @@ module.exports = function (sequelize, DataTypes) {
     localeSeoId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "LocaleSeoId".'
+      }
     },
     languageAlias: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "LanguageAlias".'
+      }
     },
     relParent: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "RelParent".'
+      }
     },
     slug: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Slug".'
+      }
     },
     key: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Key".'
+      }
     },
     parentSlug: {
       type: DataTypes.STRING
     },
     title: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Title".'
+      }
     },
     description: {
       type: DataTypes.STRING

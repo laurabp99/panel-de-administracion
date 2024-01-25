@@ -9,6 +9,9 @@ module.exports = function (sequelize, DataTypes) {
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "User".'
+      }
     },
     entity: {
       type: DataTypes.STRING,
@@ -16,7 +19,10 @@ module.exports = function (sequelize, DataTypes) {
     },
     entityId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "entity".'
+      }
     },
     action: {
       type: DataTypes.STRING,

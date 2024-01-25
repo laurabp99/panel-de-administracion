@@ -9,38 +9,65 @@ module.exports = function (sequelize, DataTypes) {
     saleId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "SaleId".'
+      }
     },
     customerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "CustomerId".'
+      }
     },
     paymentMethodId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "PaymentMethodId".'
+      }
     },
     reference: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Reference".'
+      }
     },
     totalPrice: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "TotalPrice".'
+      }
     },
     totalBasePrice: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "TotalBasePrice".'
+      }
     },
     totalTaxPrice: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "TotalTaxPrice".'
+      }
     },
     returnDate: {
       type: DataTypes.DATEONLY,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "ReturnDate".'
+      }
     },
     returnTime: {
       type: DataTypes.TIME,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "ReturnTime".'
+      }
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -100,6 +127,7 @@ module.exports = function (sequelize, DataTypes) {
     Return.belongsTo(models.Sale, { as: 'sale', foreignKey: 'saleId' })
     Return.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
     Return.belongsTo(models.PaymentMethod, { as: 'paymentMethod', foreignKey: 'paymentMethodId' })
+    Return.belongsToMany(models.Product, { through: models.ReturnDetail, as: 'products', foreignKey: 'returnId' })
   }
 
   return Return

@@ -9,43 +9,70 @@ module.exports = function (sequelize, DataTypes) {
     countryId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "CountryId".'
+      }
     },
     cityId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "CityId".'
+      }
     },
     dialCodeId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "DialCodeId".'
+      }
     },
     fiscalName: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "FiscalName".'
+      }
     },
     comercialName: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "ComercialName".'
+      }
     },
     vat: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Vat".'
+      }
     },
     comercialAddress: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     fiscalAddress: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "FiscalAddress".'
+      }
     },
     postalCode: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "PostalCode".'
+      }
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+      notNull: {
+        msg: 'Por favor, rellena el campo "Email".'
+      }
     },
     web: {
       type: DataTypes.STRING

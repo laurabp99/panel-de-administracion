@@ -9,10 +9,16 @@ module.exports = function (sequelize, DataTypes) {
     productId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "ProductId".'
+      }
     },
     productCategoryId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "ProductCategoryId".'
+      }
     },
     createdAt: {
       type: DataTypes.DATE,

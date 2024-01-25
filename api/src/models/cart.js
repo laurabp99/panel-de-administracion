@@ -9,7 +9,10 @@ module.exports = function (sequelize, DataTypes) {
     uuid: {
       type: DataTypes.UUID,
       allowNull: false,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
+      notNull: {
+        msg: 'Por favor, rellena el campo "UUID".'
+      }
     },
     customerId: {
       type: DataTypes.INTEGER,
@@ -67,6 +70,8 @@ module.exports = function (sequelize, DataTypes) {
   Cart.associate = function (models) {
     Cart.belongsTo(models.Customer, { as: 'customer', foreignKey: 'userId' })
     Cart.belongsTo(models.Fingerprint, { as: 'fingerprint', foreignKey: 'fingerprintId' })
+    Cart.hasOne(models.Sale, { as: 'sale', foreignKey: 'cartId' })
+    Cart.belongsToMany(models.Product, { through: models.CartDetail, as: 'products', foreignKey: 'cartId' })
   }
 
   return Cart

@@ -9,6 +9,9 @@ module.exports = function (sequelize, DataTypes) {
     priceId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      notNull: {
+        msg: 'Por favor, rellena el campo "PriceId".'
+      }
     },
     percentage: {
       type: DataTypes.DECIMAL
