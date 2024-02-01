@@ -91,10 +91,10 @@ class Form extends HTMLElement {
             }
 
             .form-element{
+                background-color: hsl(240, 74%, 56%);
                 color: white;
                 font-size: 18px;
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                background-color: hsl(240, 74%, 56%);
                 flex: 1;
             }
 
@@ -123,6 +123,17 @@ class Form extends HTMLElement {
             .name-validation.error{
                 border: 2px solid red;
             }
+
+            .gallery{
+              background-color: hsl(240, 79%, 68%);
+              border: 0.2rem solid hsl(214, 86%, 73%);
+              box-shadow: 7px 8px 5px black;
+              height: 10rem;
+              outline: none;
+              width: 100%;
+            }
+
+
             </style>
 
           <div class='form-container'>
@@ -204,19 +215,14 @@ class Form extends HTMLElement {
                       </div>
                     </div>
                   </div>
-                  <div class='tab-content active' data-tab='español'><h3>holi</h3></div>
-                  <div class='tab-content' data-tab='inglés'><h3>ola</h3></div>
+                  <div class='tab-content active' data-tab='español'></div>
+                  <div class='tab-content' data-tab='inglés'></div>
                 </div>
                 <div class='tab-content' data-tab='images'>
-                  <div class='form-row'>
-                    <div class='form-element'>
-                      <div class='form-label'>
-                        <label>Avatar</label>
-                      </div>
-                      <div class='form-input'>
-                        <input type='file'>
-                      </div>
-                    </div>
+                  <div class='gallery'>
+                    <button class="gallery-button"></button>
+                    <button class="gallery-button"></button>
+                    <button class="gallery-button"></button>
                   </div>
                 </div>
               </div>
@@ -255,7 +261,7 @@ class Form extends HTMLElement {
       const tab = event.target.closest('.tab')
       const lastActiveTab = tab.parentNode.querySelector('.active')
       console.log('uwu')
-      if (tab) { 
+      if (tab) {
         lastActiveTab.classList.remove('active')
         tab.classList.add('active')
         console.log(tab)
