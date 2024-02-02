@@ -10,6 +10,10 @@ class Form extends HTMLElement {
     document.addEventListener('showFilterModal', event => {
       this.openModal()
     })
+
+    document.addEventListener('showGalleryModal', event => {
+      this.openGalleryModal()
+    })
   }
 
   render () {
@@ -125,12 +129,33 @@ class Form extends HTMLElement {
             }
 
             .gallery{
+              align-items: center;
               background-color: hsl(240, 79%, 68%);
               border: 0.2rem solid hsl(214, 86%, 73%);
               box-shadow: 7px 8px 5px black;
-              height: 10rem;
+              display: flex;
+              height: 15rem;
+              justify-content: space-evenly;
               outline: none;
               width: 100%;
+            }
+
+            .gallery-button-container{
+              align-items: center;
+              color: white;
+              display: flex;
+              flex-direction: column;
+              font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+              font-size: 13px;
+              width: 5rem;
+            }
+
+
+            .gallery-button{
+              border-radius: 20px;
+              font-size: 20px;
+              height: 5rem;
+              width: 5rem;
             }
 
 
@@ -220,12 +245,20 @@ class Form extends HTMLElement {
                 </div>
                 <div class='tab-content' data-tab='images'>
                   <div class='gallery'>
-                    <button class="gallery-button"></button>
-                    <button class="gallery-button"></button>
-                    <button class="gallery-button"></button>
+                    <div class='gallery-button-container'>
+                      <h2>Avatar</h2>
+                      <button class="gallery-button"><p>+</p></button>
+                    </div>
+                    <div class='gallery-button-container'>
+                      <h2>Banner</h2>
+                      <button class="gallery-button"><p>+</p></button>
+                    </div>
+                    <div class='gallery-button-container'>
+                      <h2>Extra</h2>
+                      <button class="gallery-button"><p>+</p></button>
+                    </div>
                   </div>
                 </div>
-              </div>
             </form>
           </div> 
           `
@@ -292,6 +325,12 @@ class Form extends HTMLElement {
     const save = this.shadow.querySelector('.form-save')
     save.addEventListener('click', async (event) => {
       document.dispatchEvent(new CustomEvent('message'))
+    })
+
+    const galleryButton = this.shadow.querySelector('.gallery-button')
+    galleryButton.addEventListener('click', async (event) => {
+      event.preventDefault()
+      document.dispatchEvent(new CustomEvent('showGalleryModal'))
     })
   }
 }
