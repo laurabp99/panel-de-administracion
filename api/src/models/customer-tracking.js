@@ -1,7 +1,7 @@
 module.exports = function (sequelize, DataTypes) {
   const CustomerTracking = sequelize.define('CustomerTracking', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
