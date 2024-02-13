@@ -111,6 +111,15 @@ class Form extends HTMLElement {
                 outline: none;
             }
 
+            .name-validation{
+                width: 100%;
+                background-color: hsl(240, 79%, 68%);
+                padding: 1rem;
+                border: 0.2rem solid hsl(214, 86%, 73%);
+                box-shadow: 7px 8px 5px black;
+                outline: none;
+            }
+
             .languages-tabs{
                 display: flex;
                 background-color: white;
@@ -192,7 +201,8 @@ class Form extends HTMLElement {
                 </div>
               </div>
             </div>
-            <form action>
+            <form>
+              <input type="hidden" name="id" />
               <div class='tab-content active' data-tab='general'>
                 <div class='form-row'>
                   <div class='form-element'>
@@ -200,48 +210,43 @@ class Form extends HTMLElement {
                       <label>Nombre</label>
                     </div>
                     <div class='form-input'>
-                      <input type='text' class='name-validation' data-onlyletters='true'>
-                    </div>
-                  </div>
-                  <div class='form-element'>
-                    <div class='form-label'>
-                      <label>Email</label>
-                    </div>
-                    <div class='form-input'>
-                      <input type='email'>
+                      <input type='text' name="name" class='name-validation' data-onlyletters='true'>
                     </div>
                   </div>
                 </div>
-                <div class='form-row'>
-                  <div class='form-element'>
-                    <div class='form-label'>
-                      <label>Password</label>
-                    </div>
-                    <div class='form-input'>
-                      <input type='password' class='validate' data-minlength='8'>
-                    </div>
-                  </div>
-                  <div class='form-element'>
-                    <div class='form-label'>
-                      <label>Repetir password</label>
-                    </div>
-                    <div class='form-input'>
-                      <input type='password'>
-                    </div>
-                  </div>
                 </div>
                   <div class='languages-tabs'>
                     <div class='tabs'>
                       <div class='tab active' data-tab='español'>
                         <h2>es</h2>
                       </div>
-                      <div class='tab' data-tab='inglés'>
+                      <div class='tab' data-tab='ingles'>
                         <h2>en</h2>
                       </div>
                     </div>
                   </div>
+                  <div class='form-row'>
+                    <div class='form-element'>
+                      <div class='form-label'>
+                        <label>Pregunta</label>
+                      </div>
+                      <div class='form-input'>
+                        <input type='text' class='name-validation' data-onlyletters='true'>
+                      </div>
+                    </div>
+                  </div>
+                  <div class='form-row'>
+                    <div class='form-element'>
+                      <div class='form-label'>
+                        <label>Respuesta</label>
+                      </div>
+                      <div class='form-input'>
+                        <textarea class='name-validation' data-onlyletters='true'></textarea>
+                      </div>
+                    </div>
+                  </div>
                   <div class='tab-content active' data-tab='español'></div>
-                  <div class='tab-content' data-tab='inglés'></div>
+                  <div class='tab-content' data-tab='ingles'></div>
                 </div>
                 <div class='tab-content' data-tab='images'>
                   <div class='gallery'>
@@ -263,9 +268,9 @@ class Form extends HTMLElement {
           </div> 
           `
 
-    const form = this.shadow.querySelector('.form-container')
+    const formContainer = this.shadow.querySelector('.form-container')
 
-    form.addEventListener('input', (event) => {
+    formContainer.addEventListener('input', (event) => {
       if (event.target.closest('.validate')) {
         const validate = event.target.closest('.validate')
 
@@ -288,49 +293,50 @@ class Form extends HTMLElement {
         }
       }
     })
-    console.log(form)
 
-    form.addEventListener('click', (event) => {
-      const tab = event.target.closest('.tab')
-      const lastActiveTab = tab.parentNode.querySelector('.active')
-      console.log('uwu')
-      if (tab) {
-        lastActiveTab.classList.remove('active')
-        tab.classList.add('active')
-        console.log(tab)
-        this.shadow.querySelector(`.tab-content[data-tab='${tab.dataset.tab}']`).classList.add('active')
-        this.shadow.querySelector(`.tab-content[data-tab='${lastActiveTab.dataset.tab}']`).classList.remove('active')
+    formContainer.addEventListener('click', async (event) => {
+      if (event.target.closest('.tab')) {
+        const tab = event.target.closest('.tab')
+        const lastActiveTab = tab.parentNode.querySelector('.active')
+        if (tab) {
+          lastActiveTab.classList.remove('active')
+          tab.classList.add('active')
+          this.shadow.querySelector(`.tab-content[data-tab='${tab.dataset.tab}']`).classList.add('active')
+          this.shadow.querySelector(`.tab-content[data-tab='${lastActiveTab.dataset.tab}']`).classList.remove('active')
+        }
       }
-    })
-    // const tabs = this.shadow.querySelector('.tabs')
 
-    // tabs.addEventListener('click', (event) => {
-    //   if (event.target.closest('.tab')) {
-    //     const tab = event.target.closest('.tab')
-    //     tab.parentElement.querySelector('.active').classList.remove('active')
-    //     tab.classList.toggle('active')
+      if (event.target.closest('.form-save')) {
+        const form = this.shadow.querySelector('form')
+        const formData = new FormData(form)
+        const formDataJson = Object.fromEntries(formData.entries())
+        delete formDataJson.id
 
-    //     const tabContents = this.shadow.querySelectorAll('.tab-content')
+        try {
+          const response = await fetch('http://127.0.0.1:8080/api/admin/faqs', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
 
-    //     tabContents.forEach(tabContent => {
-    //       if (tab.dataset.tab === tabContent.dataset.tab) {
-    //         tabContent.classList.add('active')
-    //       } else if (tab.dataset.tab !== tabContent.dataset.tab) {
-    //         tabContent.classList.remove('active')
-    //       }
-    //     })
-    //   }
-    // })
+            body: JSON.stringify(formDataJson)
+          })
 
-    const save = this.shadow.querySelector('.form-save')
-    save.addEventListener('click', async (event) => {
-      document.dispatchEvent(new CustomEvent('message'))
-    })
+          if (response.status === 500 || response.status === 422) {
+            throw response
+          }
 
-    const galleryButton = this.shadow.querySelector('.gallery-button')
-    galleryButton.addEventListener('click', async (event) => {
-      event.preventDefault()
-      document.dispatchEvent(new CustomEvent('showGalleryModal'))
+          if (response.status === 200) {
+            const data = await response.json()
+            document.dispatchEvent(new CustomEvent('message'))
+          }
+        } catch (response) {
+          const error = await response.json()
+          error.message.forEach(error => {
+            console.log(error.message)
+          })
+        }
+      }
     })
   }
 }
