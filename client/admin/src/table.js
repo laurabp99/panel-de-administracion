@@ -2,14 +2,21 @@ class Table extends HTMLElement {
   constructor () {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
+    this.rows = null
   }
 
   connectedCallback () {
-    this.render()
+    this.loadData().then(() => this.render())
 
     document.addEventListener('showFilterModal', event => {
       this.openModal()
     })
+  }
+
+  async loadData () {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}${this.getAttribute('endpoint')}`)
+    const data = await response.json()
+    this.rows = data.rows
   }
 
   render () {
@@ -26,8 +33,9 @@ class Table extends HTMLElement {
                 margin-left: 10px;
             }
 
-            li:after{
-                content: ":"
+            li span:after{
+                content: ":";
+                margin-right: 0.5rem;
             }
                 
             .filter-bar {
@@ -117,103 +125,91 @@ class Table extends HTMLElement {
             }
             </style>
             <div class="table">
-                <div class="filter-bar">
-                    <div class="filter-button">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24">
-                            <title>Filter Menu</title>
-                            <path
-                                d="M11 11L16.76 3.62A1 1 0 0 0 16.59 2.22A1 1 0 0 0 16 2H2A1 1 0 0 0 1.38 2.22A1 1 0 0 0 1.21 3.62L7 11V16.87A1 1 0 0 0 7.29 17.7L9.29 19.7A1 1 0 0 0 10.7 19.7A1 1 0 0 0 11 18.87V11M13 16L18 21L23 16Z" />
-                        </svg>
-                    </div>
+              <div class="filter-bar">
+                <div class="filter-button">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24">
+                    <title>Filter Menu</title>
+                  <path
+                      d="M11 11L16.76 3.62A1 1 0 0 0 16.59 2.22A1 1 0 0 0 16 2H2A1 1 0 0 0 1.38 2.22A1 1 0 0 0 1.21 3.62L7 11V16.87A1 1 0 0 0 7.29 17.7L9.29 19.7A1 1 0 0 0 10.7 19.7A1 1 0 0 0 11 18.87V11M13 16L18 21L23 16Z" />
+                  </svg>
                 </div>
-                <div class="registers">
-                    <div class="register">
-                        <div class="modify-register">
-                            <div class="edit-button">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24">
-                                    <title>pencil</title>
-                                    <path
-                                        d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
-                                </svg>
-                            </div>
-                            <div class="delete-button">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24">
-                                    <title>delete</title>
-                                    <path
-                                        d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="register-data">
-                            <ul>
-                                <li>Email</li>
-                                <li>Nombre</li>
-                                <li>Apellidos</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="register">
-                        <div class="modify-register">
-                            <div class="edit-button">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24">
-                                    <title>pencil</title>
-                                    <path
-                                        d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
-                                </svg>
-                            </div>
-                            <div class="delete-button">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24">
-                                    <title>delete</title>
-                                    <path
-                                        d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="register-data">
-                            <ul>
-                                <li>Email</li>
-                                <li>Nombre</li>
-                                <li>Apellidos</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="register">
-                        <div class="modify-register">
-                            <div class="edit-button">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24">
-                                    <title>pencil</title>
-                                    <path
-                                        d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
-                                </svg>
-                            </div>
-                            <div class="delete-button">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24">
-                                    <title>delete</title>
-                                    <path
-                                        d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="register-data">
-                            <ul>
-                                <li>Email</li>
-                                <li>Nombre</li>
-                                <li>Apellidos</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    </div>
-                </div>
+              </div>
+              <div class="registers"></div>
             </div>
         `
+
+    const registers = this.shadow.querySelector('.registers')
+
+    this.rows.forEach(row => {
+      // <div class="register">
+      //   <div class="modify-register">
+      //     <div class="edit-button">
+      //       <svg xmlns="http://www.w3.org/2000/svg"
+      //           viewBox="0 0 24 24">
+      //         <title>pencil</title>
+      //         <path
+      //           d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+      //       </svg>
+      //     </div>
+      //     <div class="delete-button">
+      //       <svg xmlns="http://www.w3.org/2000/svg"
+      //         viewBox="0 0 24 24">
+      //       <title>delete</title>
+      //       <path
+      //         d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
+      //       </svg>
+      //     </div>
+      //   </div>
+      //   <div class="register-data">
+      //     <ul>
+      //       <li>Email</li>
+      //       <li>Nombre</li>
+      //       <li>Apellidos</li>
+      //     </ul>
+      //   </div>
+      // </div>
+      const newRegister = document.createElement('div')
+      newRegister.classList.add('register')
+      registers.appendChild(newRegister)
+
+      const modifyRegister = document.createElement('div')
+      modifyRegister.classList.add('modify-register')
+
+      const editButton = document.createElement('div')
+      editButton.classList.add('edit-button')
+      editButton.dataset.id = row.id
+      editButton.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <title>pencil</title>
+              <path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+          </svg>
+      `
+      const deleteButton = document.createElement('div')
+      deleteButton.classList.add('delete-button')
+      deleteButton.dataset.id = row.id
+      deleteButton.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <title>delete</title>
+              <path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
+          </svg>
+      `
+
+      modifyRegister.appendChild(editButton)
+      modifyRegister.appendChild(deleteButton)
+      newRegister.appendChild(modifyRegister)
+
+      const registerData = document.createElement('div')
+      registerData.classList.add('register-data')
+      const list = document.createElement('ul')
+      list.innerHTML = `
+          <li><span>Nombre</span>${row.name}</li>
+          <li><span>CreatedAt</span>${row.createdAt}</li>
+          <li><span>UpdatedAt</span>${row.updatedAt}</li>
+      `
+      registerData.appendChild(list)
+      newRegister.appendChild(registerData)
+    })
 
     const tableSection = this.shadow.querySelector('.table')
 
@@ -222,9 +218,8 @@ class Table extends HTMLElement {
         document.dispatchEvent(new CustomEvent('showFilterModal'))
       }
 
-      if (event.target.closest('.edit-button')) {
-
-      }
+      // if (event.target.closest('.edit-button')) {
+      // }
 
       if (event.target.closest('.delete-button')) {
         document.dispatchEvent(new CustomEvent('showModalDestroy'))

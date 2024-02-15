@@ -137,6 +137,13 @@ class Form extends HTMLElement {
                 border: 2px solid red;
             }
 
+            .error-message{
+              color: white;
+              background-color: hsl(240, 74%, 56%);
+              font-size: 20px;
+              width: 100%;
+            }
+
             .gallery{
               align-items: center;
               background-color: hsl(240, 79%, 68%);
@@ -202,6 +209,7 @@ class Form extends HTMLElement {
               </div>
             </div>
             <form>
+              <div class="error-message"></div>
               <input type="hidden" name="id" />
               <div class='tab-content active' data-tab='general'>
                 <div class='form-row'>
@@ -313,7 +321,7 @@ class Form extends HTMLElement {
         delete formDataJson.id
 
         try {
-          const response = await fetch('http://127.0.0.1:8080/api/admin/faqs', {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}${this.getAttribute('endpoint')}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -331,8 +339,13 @@ class Form extends HTMLElement {
             document.dispatchEvent(new CustomEvent('message'))
           }
         } catch (response) {
+          const errorMessage = this.shadow.querySelector('.error-message')
+          errorMessage.innerHTML = ''
           const error = await response.json()
           error.message.forEach(error => {
+            const errorLine = document.createElement('p')
+            errorLine.innerHTML = error.message
+            errorMessage.appendChild(errorLine)
             console.log(error.message)
           })
         }
