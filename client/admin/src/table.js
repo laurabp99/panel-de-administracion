@@ -218,8 +218,19 @@ class Table extends HTMLElement {
         document.dispatchEvent(new CustomEvent('showFilterModal'))
       }
 
-      // if (event.target.closest('.edit-button')) {
-      // }
+      if (event.target.closest('.edit-button')) {
+        const editButton = event.target.closest('.edit-button')
+        const id = editButton.dataset.id
+
+        const response = await fetch(`${import.meta.env.VITE_API_URL}${this.getAttribute('endpoint')}/${id}`)
+        const data = await response.json()
+
+        document.dispatchEvent(new CustomEvent('showElement', {
+          detail: {
+            data
+          }
+        }))
+      }
 
       if (event.target.closest('.delete-button')) {
         document.dispatchEvent(new CustomEvent('showModalDestroy'))
