@@ -2,16 +2,17 @@ class Destroy extends HTMLElement {
   constructor () {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
+    this.endPoint = null
   }
 
   connectedCallback () {
-    this.render()
-
-    const deleteModal = this.shadow.querySelector('.delete-modal')
-
     document.addEventListener('showModalDestroy', event => {
+      this.endPoint = event.detail.elementUrl
+      const deleteModal = this.shadow.querySelector('.delete-modal')
       deleteModal.classList.add('active')
     })
+
+    this.render()
   }
 
   render () {
@@ -70,7 +71,6 @@ class Destroy extends HTMLElement {
                     font-size: 20px;
                     font-weight:600;
                     cursor: pointer;
-                    position: absolute;
                     right: 15px;
                 }
 
@@ -120,7 +120,14 @@ class Destroy extends HTMLElement {
       deleteModal.classList.toggle('active')
     })
 
-    deleteYes?.addEventListener('click', () => {
+    deleteYes?.addEventListener('click', async () => {
+      const response = await fetch(this.endPoint, {
+        method: 'DELETE'
+      })
+      const data = await response.json()
+      const deleteModal = this.shadow.querySelector('.delete-modal')
+      deleteModal.classList.toggle('active')
+      document.dispatchEvent(new CustomEvent('refresh'))
     })
   }
 }

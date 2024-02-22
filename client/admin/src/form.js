@@ -320,6 +320,10 @@ class Form extends HTMLElement {
         }
       }
 
+      if (event.target.closest('.form-clear')) {
+        this.render()
+      }
+
       if (event.target.closest('.form-save')) {
         const form = this.shadow.querySelector('form')
         const formData = new FormData(form)
@@ -361,6 +365,8 @@ class Form extends HTMLElement {
             console.log(error.message)
           })
         }
+        document.dispatchEvent(new CustomEvent('refresh'))
+        this.render()
       }
     })
   }

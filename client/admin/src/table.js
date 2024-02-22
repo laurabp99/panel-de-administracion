@@ -11,6 +11,10 @@ class Table extends HTMLElement {
     document.addEventListener('showFilterModal', event => {
       this.openModal()
     })
+
+    document.addEventListener('refresh', event => {
+      this.loadData().then(() => this.render())
+    })
   }
 
   async loadData () {
@@ -233,7 +237,14 @@ class Table extends HTMLElement {
       }
 
       if (event.target.closest('.delete-button')) {
-        document.dispatchEvent(new CustomEvent('showModalDestroy'))
+        const deleteButton = event.target.closest('.delete-button')
+        const id = deleteButton.dataset.id
+        const endPoint = `${import.meta.env.VITE_API_URL}${this.getAttribute('endpoint')}/${id}`
+        document.dispatchEvent(new CustomEvent('showModalDestroy', {
+          detail: {
+            elementUrl: endPoint
+          }
+        }))
       }
     })
   }
