@@ -3,7 +3,7 @@ class Faqs extends HTMLElement {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
     this.rows = null
-    this.datas = null
+    this.data = null
   }
 
   async connectedCallback () {
@@ -12,10 +12,7 @@ class Faqs extends HTMLElement {
 
   async loadData () {
     const response = await fetch(`${import.meta.env.VITE_API_URL}${this.getAttribute('endpoint')}?size=4`)
-    const data = await response.json()
-    this.rows = data.rows
-    this.datas = data
-    console.log(this.datas)
+    this.data = await response.json()
     this.render()
   }
 
@@ -53,13 +50,13 @@ class Faqs extends HTMLElement {
 
     const faqsContainer = this.shadow.querySelector('.faqs-container')
 
-    this.rows.forEach(row => {
+    this.data.forEach(faq => {
       const faqElement = document.createElement('details')
       const faqElementSummary = document.createElement('summary')
       faqElement.name = 'faq'
-      faqElementSummary.textContent = row.name
+      faqElementSummary.textContent = faq.locales.answer
       faqElement.appendChild(faqElementSummary)
-      faqElement.innerHTML += row.order
+      // faqElement.innerHTML += row.order
       faqsContainer.appendChild(faqElement)
     })
   }
