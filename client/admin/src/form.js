@@ -239,28 +239,50 @@ class Form extends HTMLElement {
                       </div>
                     </div>
                   </div>
-                  <div class='form-row'>
-                    <div class='form-element'>
-                      <div class='form-label'>
-                        <label>Pregunta</label>
+                  <div class='tab-content active' data-tab='español'>
+                    <div class='form-row'>
+                      <div class='form-element'>
+                        <div class='form-label'>
+                          <label>Pregunta</label>
+                        </div>
+                        <div class='form-input'>
+                          <input type='text' name="locales.es.question" class='name-validation' data-onlyletters='true'>
+                        </div>
                       </div>
-                      <div class='form-input'>
-                        <input type='text' class='name-validation' data-onlyletters='true'>
+                    </div>
+                    <div class='form-row'>
+                      <div class='form-element'>
+                        <div class='form-label'>
+                          <label>Respuesta</label>
+                        </div>
+                        <div class='form-input'>
+                          <textarea class='name-validation' name="locales.es.answer" data-onlyletters='true'></textarea>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class='form-row'>
-                    <div class='form-element'>
-                      <div class='form-label'>
-                        <label>Respuesta</label>
+                  <div class='tab-content' data-tab='ingles'>
+                    <div class='form-row'>
+                      <div class='form-element'>
+                        <div class='form-label'>
+                          <label>Pregunta</label>
+                        </div>
+                        <div class='form-input'>
+                          <input type='text' class='name-validation' name="locales.en.question" data-onlyletters='true'>
+                        </div>
                       </div>
-                      <div class='form-input'>
-                        <textarea class='name-validation' data-onlyletters='true'></textarea>
+                    </div>
+                    <div class='form-row'>
+                      <div class='form-element'>
+                        <div class='form-label'>
+                          <label>Respuesta</label>
+                        </div>
+                        <div class='form-input'>
+                          <textarea class='name-validation' name="locales.en.answer" data-onlyletters='true'></textarea>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class='tab-content active' data-tab='español'></div>
-                  <div class='tab-content' data-tab='ingles'></div>
                 </div>
                 <div class='tab-content' data-tab='images'>
                   <div class='gallery'>
@@ -327,7 +349,33 @@ class Form extends HTMLElement {
       if (event.target.closest('.form-save')) {
         const form = this.shadow.querySelector('form')
         const formData = new FormData(form)
-        const formDataJson = Object.fromEntries(formData.entries())
+        const formDataJson = {}
+
+        for (const [key, value] of formData.entries()) {
+          if (key.includes('locales')) {
+            const [prefix, locales, field] = key.split('.')
+
+            if (!(prefix in formDataJson)) {
+              formDataJson[prefix] = {}
+            }
+
+            if (!(locales in formDataJson[prefix])) {
+              formDataJson[prefix][locales] = {}
+            }
+
+            formDataJson[prefix][locales][field] = value ?? null
+          } else if (key.includes('.')) {
+            const [prefix, field] = key.split('.')
+
+            if (!(prefix in formDataJson)) {
+              formDataJson[prefix] = {}
+            }
+
+            formDataJson[prefix][field] = value ?? null
+          } else {
+            formDataJson[key] = value ?? null
+          }
+        }
 
         if (!formDataJson.id) {
           delete formDataJson.id

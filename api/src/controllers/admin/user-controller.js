@@ -1,6 +1,6 @@
-const db = require('../../models')
-const User = db.User
-const Op = db.Sequelize.Op
+const sequelizeDb = require('../../models/sequelize')
+const User = sequelizeDb.User
+const Op = sequelizeDb.Sequelize.Op
 
 exports.create = (req, res) => {
   User.create(req.body).then(data => {
