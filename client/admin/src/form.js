@@ -7,6 +7,13 @@ class Form extends HTMLElement {
   connectedCallback () {
     this.render()
 
+    const galleryButtons = this.shadow.querySelectorAll('.gallery-button')
+    galleryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        document.dispatchEvent(new Event('showGalleryModal'))
+      })
+    })
+
     document.addEventListener('showFilterModal', event => {
       this.openModal()
     })
@@ -339,6 +346,22 @@ class Form extends HTMLElement {
           tab.classList.add('active')
           this.shadow.querySelector(`.tab-content[data-tab='${tab.dataset.tab}']`).classList.add('active')
           this.shadow.querySelector(`.tab-content[data-tab='${lastActiveTab.dataset.tab}']`).classList.remove('active')
+
+          if (tab.dataset.tab === 'images') {
+            const preguntaRespuestaTab = this.shadow.querySelector('.tab-content[data-tab="español"]')
+            preguntaRespuestaTab.classList.remove('active')
+
+            const languagesTabs = this.shadow.querySelector('.languages-tabs')
+            languagesTabs.style.display = 'none'
+          } else {
+            const languagesTabs = this.shadow.querySelector('.languages-tabs')
+            languagesTabs.style.display = 'flex'
+          }
+
+          if (tab.dataset.tab !== 'images') {
+            const preguntaRespuestaTab = this.shadow.querySelector('.tab-content[data-tab="español"]')
+            preguntaRespuestaTab.classList.add('active')
+          }
         }
       }
 
