@@ -10,7 +10,7 @@ class GalleryModal extends HTMLElement {
     document.addEventListener('showGalleryModal', this.handleShowGalleryModal.bind(this))
 
     const imageInput = this.shadow.querySelector('#imageInput')
-    imageInput.addEventListener('change', this.handleImageInputChange.bind(this))
+    // imageInput.addEventListener('change', this.handleImageInputChange.bind(this))
 
     const closeButton = this.shadow.querySelector('.close-button')
     closeButton.addEventListener('click', this.closeGalleryModal.bind(this))
@@ -19,21 +19,6 @@ class GalleryModal extends HTMLElement {
   handleShowGalleryModal (event) {
     const galleryModal = this.shadow.querySelector('.gallery-modal')
     galleryModal.classList.add('active')
-  }
-
-  handleImageInputChange (event) {
-    const galleryModalContent = this.shadow.querySelector('.gallery-modal-content')
-    const files = event.target.files
-
-    for (const file of files) {
-      const imageUrl = URL.createObjectURL(file)
-
-      const imageElement = document.createElement('img')
-      imageElement.src = imageUrl
-      imageElement.classList.add('gallery-image')
-
-      galleryModalContent.appendChild(imageElement)
-    }
   }
 
   render () {
@@ -145,6 +130,17 @@ class GalleryModal extends HTMLElement {
     const result = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/images`, {
       method: 'POST',
       body: formData
+    })
+    const data = await result.json()
+    console.log(data)
+    const galleryModalContent = this.shadow.querySelector('.gallery-modal-content')
+    data.forEach(imageName => {
+      const imageUrl = `${import.meta.env.VITE_API_URL}/api/admin/images/${imageName}`
+      const imageElement = document.createElement('img')
+      imageElement.src = imageUrl
+      imageElement.classList.add('gallery-image')
+
+      galleryModalContent.appendChild(imageElement)
     })
   }
 

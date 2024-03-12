@@ -3,14 +3,14 @@ const Image = sequelizeDb.Image
 const Op = sequelizeDb.Sequelize.Op
 
 exports.create = async (req, res) => {
-  const result = await req.imageService.uploadImage(req.files)
-  // Image.create(req.body).then(data => {
-  //   res.status(200).send(data)
-  // }).catch(err => {
-  //   res.status(500).send({
-  //     message: err.errors || 'Algún error ha surgido al insertar el dato.'
-  //   })
-  // })
+  try {
+    const result = await req.imageService.uploadImage(req.files)
+    res.status(200).send(result)
+  } catch (error) {
+    res.status(500).send({
+      message: err.errors || 'Algún error ha surgido al insertar el dato.'
+    })
+  }
 }
 
 exports.findAll = (req, res) => {
@@ -41,21 +41,32 @@ exports.findAll = (req, res) => {
 }
 
 exports.findOne = (req, res) => {
-  const id = req.params.id
-
-  Image.findByPk(id).then(data => {
-    if (data) {
-      res.status(200).send(data)
-    } else {
-      res.status(404).send({
-        message: `No se puede encontrar el elemento con la id=${id}.`
-      })
+  const fileName = req.params.filename
+  const options = {
+    root: __dirname + '../../../storage/images/gallery/thumbnail/',
+    dotfiles: 'deny',
+    headers: {
+      'x-timestamp': Date.now(),
+      'x-sent': true
     }
-  }).catch(_ => {
-    res.status(500).send({
-      message: 'Algún error ha surgido al recuperar la id=' + id
-    })
-  })
+  }
+
+  res.sendFile(fileName, options)
+  // const id = req.params.id
+
+  // Image.findByPk(id).then(data => {
+  //   if (data) {
+  //     res.status(200).send(data)
+  //   } else {
+  //     res.status(404).send({
+  //       message: `No se puede encontrar el elemento con la id=${id}.`
+  //     })
+  //   }
+  // }).catch(_ => {
+  //   res.status(500).send({
+  //     message: 'Algún error ha surgido al recuperar la id=' + id
+  //   })
+  // })
 }
 
 exports.update = (req, res) => {

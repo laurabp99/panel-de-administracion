@@ -5,9 +5,9 @@ module.exports = (app, upload) => {
 
   router.post('/', [uploadFiles], controller.create)
   router.get('/', controller.findAll)
-  router.get('/:id', controller.findOne)
-  router.put('/:id', controller.update)
-  router.delete('/:id', controller.delete)
+  router.get('/:filename', controller.findOne)
+  router.put('/:filename', controller.update)
+  router.delete('/:filename', controller.delete)
 
   app.use('/api/admin/images', router)
 }

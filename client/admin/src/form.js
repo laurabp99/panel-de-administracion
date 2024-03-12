@@ -19,7 +19,7 @@ class Form extends HTMLElement {
     })
 
     document.addEventListener('showGalleryModal', event => {
-      this.openGalleryModal()
+      // this.openGalleryModal()
     })
 
     document.addEventListener('showElement', this.handleShowElement.bind(this))
