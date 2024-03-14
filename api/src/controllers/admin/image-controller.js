@@ -1,11 +1,15 @@
-const sequelizeDb = require('../../models/sequelize')
-const Image = sequelizeDb.Image
-const Op = sequelizeDb.Sequelize.Op
+const mongooseDb = require('../../models/mongoose')
+const Image = mongooseDb.Image
+const moment = require('moment')
 
 exports.create = async (req, res) => {
   try {
     const result = await req.imageService.uploadImage(req.files)
     res.status(200).send(result)
+
+    for (const filename of result) {
+      await Image.create({ filename })
+    }
   } catch (error) {
     res.status(500).send({
       message: err.errors || 'Algún error ha surgido al insertar el dato.'
@@ -13,31 +17,45 @@ exports.create = async (req, res) => {
   }
 }
 
-exports.findAll = (req, res) => {
+exports.findAll = async (req, res) => {
 
-  const page = req.query.page || 1
-  const limit = parseInt(req.query.size) || 10
-  const offset = (page - 1) * limit
+  try {
+    const page = req.query.page || 1
+    const limit = parseInt(req.query.size) || 10
+    const offset = (page - 1) * limit
+    const whereStatement = {}
+    whereStatement.deletedAt = { $exists: false }
 
-  Image.findAndCountAll({
-    attributes: ['id', 'name', 'title', 'createdAt', 'updatedAt'],
-    limit,
-    offset,
-    order: [['createdAt', 'DESC']]
-  })
-    .then(result => {
-      result.meta = {
-        total: result.count,
-        pages: Math.ceil(result.count / limit),
+    const result = await Image.find(whereStatement)
+      .skip(offset)
+      .limit(limit)
+      .sort({ createdAt: -1 })
+      .lean()
+      .exec()
+
+    const count = await Image.countDocuments(whereStatement)
+
+    const response = {
+      rows: result.map(doc => ({
+        ...doc,
+        id: doc._id,
+        _id: undefined,
+        createdAt: moment(doc.createdAt).format('YYYY-MM-DD HH:mm'),
+        updatedAt: moment(doc.updatedAt).format('YYYY-MM-DD HH:mm')
+      })),
+      meta: {
+        total: count,
+        pages: Math.ceil(count / limit),
         currentPage: page
       }
+    }
 
-      res.status(200).send(result)
-    }).catch(err => {
-      res.status(500).send({
-        message: err.errors || 'Algún error ha surgido al recuperar los datos.'
-      })
+    res.status(200).send(response)
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || 'Algún error ha surgido al recuperar los datos.'
     })
+  }
 }
 
 exports.findOne = (req, res) => {
@@ -92,23 +110,24 @@ exports.update = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-  const id = req.params.id
+  console.log(req.params.filename)
+  // const id = req.params.id
 
-  Image.destroy({
-    where: { id }
-  }).then((numberRowsAffected) => {
-    if (numberRowsAffected === 1) {
-      res.status(200).send({
-        message: 'El elemento ha sido borrado correctamente'
-      })
-    } else {
-      res.status(404).send({
-        message: `No se puede borrar el elemento con la id=${id}. Tal vez no se ha encontrado el elemento.`
-      })
-    }
-  }).catch(_ => {
-    res.status(500).send({
-      message: 'Algún error ha surgido al borrar la id=' + id
-    })
-  })
+  // Image.destroy({
+  //   where: { id }
+  // }).then((numberRowsAffected) => {
+  //   if (numberRowsAffected === 1) {
+  //     res.status(200).send({
+  //       message: 'El elemento ha sido borrado correctamente'
+  //     })
+  //   } else {
+  //     res.status(404).send({
+  //       message: `No se puede borrar el elemento con la id=${id}. Tal vez no se ha encontrado el elemento.`
+  //     })
+  //   }
+  // }).catch(_ => {
+  //   res.status(500).send({
+  //     message: 'Algún error ha surgido al borrar la id=' + id
+  //   })
+  // })
 }

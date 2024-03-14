@@ -297,14 +297,6 @@ class Form extends HTMLElement {
                       <h2>Avatar</h2>
                       <button class="gallery-button"><p>+</p></button>
                     </div>
-                    <div class='gallery-button-container'>
-                      <h2>Banner</h2>
-                      <button class="gallery-button"><p>+</p></button>
-                    </div>
-                    <div class='gallery-button-container'>
-                      <h2>Extra</h2>
-                      <button class="gallery-button"><p>+</p></button>
-                    </div>
                   </div>
                 </div>
             </form>
