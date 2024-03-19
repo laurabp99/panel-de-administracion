@@ -34,6 +34,7 @@ class GalleryModal extends HTMLElement {
 
         .gallery-modal.active {
           display: flex;
+          height: 100vh;
         }
 
         .gallery-modal-content {
@@ -44,8 +45,7 @@ class GalleryModal extends HTMLElement {
           border: 0.2rem solid white;
           box-shadow: 7px 8px 5px black;
           width: 80%;
-          height: 80%;
-          max-width: 800px;
+          max-width: 48rem;
           max-height: 80vh;
           overflow-y: auto;
           text-align: center;
@@ -55,6 +55,8 @@ class GalleryModal extends HTMLElement {
           justify-content: flex-start;
           align-items: flex-start;
           padding-top: 50px;
+          padding-bottom: 5rem;
+
         }
 
         .gallery-button-container input[type="file"] {
@@ -74,11 +76,15 @@ class GalleryModal extends HTMLElement {
           justify-content: center;
           align-items: center;
           cursor: pointer;
+          margin: 5px;
         }
 
         .gallery-image-container {
             position: relative;
             display: inline-block;
+            margin: 5px;
+            height: 7rem;
+            width: 7rem;
           }
 
         .delete-image {
@@ -106,8 +112,8 @@ class GalleryModal extends HTMLElement {
         }
 
         .gallery-image {
-          width: 7rem;
-          height: 7rem;
+          width: 100%;
+          height: 100%;
           object-fit: cover;
           border-radius: 5px;
         }
@@ -135,7 +141,7 @@ class GalleryModal extends HTMLElement {
         }
 
         .gallery-image-container:hover .delete-image {
-          display: block;
+          display: flex;
         }
 
         .gallery-image-container:hover .close-icon {
@@ -144,6 +150,25 @@ class GalleryModal extends HTMLElement {
 
         .selected {
           border: 4px solid green;
+          box-sizing: border-box;
+        }
+
+        .select-button {
+          position: absolute;
+          bottom: 20px;
+          right: 20px;
+          padding: 10px 20px;
+          font-size: 16px;
+          background-color: white;
+          color: #4CAF50;
+          border: 2px solid #4CAF50;
+          border-radius: 5px;
+        }
+
+        .select-button.selected { /* Agrega el estilo cuando se hace clic en una imagen */
+          background-color: #4CAF50;
+          color: white;
+          cursor: pointer;
         }
       </style>
 
@@ -154,9 +179,31 @@ class GalleryModal extends HTMLElement {
             <input type='file' id='imageInput' name="file" accept='image/*'>
             <label for='imageInput'>+</label>
           </div>
+          <button class="select-button">Seleccionar</button>
         </div>
       </div>
     `
+    const galleryModalContent = this.shadow.querySelector('.gallery-modal-content')
+
+    galleryModalContent.addEventListener('click', event => {
+      if (event.target.classList.contains('gallery-image')) {
+        const selectedImage = event.target
+        const selectedContainer = selectedImage.parentNode
+
+        // Si la imagen ya está seleccionada, la deselecciona
+        if (selectedContainer.classList.contains('selected')) {
+          selectedContainer.classList.remove('selected')
+        } else {
+          // Si la imagen no está seleccionada, la selecciona y deselecciona las demás
+          const imageContainers = this.shadow.querySelectorAll('.gallery-image-container')
+          imageContainers.forEach(container => {
+            container.classList.remove('selected')
+          })
+          selectedContainer.classList.add('selected')
+          this.shadow.querySelector('.select-button').classList.add('selected')
+        }
+      }
+    })
 
     this.getThumbnails()
 
@@ -236,17 +283,10 @@ class GalleryModal extends HTMLElement {
     imageElementContainer.appendChild(closeButton)
     galleryModalContent.appendChild(imageElementContainer)
 
-    galleryModalContent.addEventListener('click', event => {
-      if (event.target.classList.contains('gallery-image')) {
-        const selectedImage = event.target
-        const imageContainers = this.shadow.querySelectorAll('.gallery-image-container')
-
-        imageContainers.forEach(container => {
-          container.classList.remove('selected')
-        })
-
-        selectedImage.parentNode.classList.add('selected')
-      }
+    // Se cierra el modal al hacer clic en el botón Seleccionar
+    this.shadow.querySelector('.select-button').addEventListener('click', () => {
+      const galleryModal = this.shadow.querySelector('.gallery-modal')
+      galleryModal.classList.remove('active')
     })
   }
 }

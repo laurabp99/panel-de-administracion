@@ -21,7 +21,7 @@ exports.findAll = async (req, res) => {
 
   try {
     const page = req.query.page || 1
-    const limit = parseInt(req.query.size) || 10
+    const limit = parseInt(req.query.size) || 50
     const offset = (page - 1) * limit
     const whereStatement = {}
     whereStatement.deletedAt = { $exists: false }
