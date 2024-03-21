@@ -10,9 +10,9 @@ export default (() => {
       const tabContents = document.querySelectorAll('.tab-content')
 
       tabContents.forEach(tabContent => {
-        if (tab.dataset.tab == tabContent.dataset.tab) {
+        if (tab.dataset.tab === tabContent.dataset.tab) {
           tabContent.classList.add('active')
-        } else if (tab.dataset.tab != tabContent.dataset.tab) {
+        } else if (tab.dataset.tab !== tabContent.dataset.tab) {
           tabContent.classList.remove('active')
         }
       })

@@ -37,6 +37,14 @@ module.exports = class ImageService {
   }
 
   deleteImages = async filename => {
-
+    try {
+      await fs.unlink(path.join(__dirname, `../storage/images/gallery/original/${filename}`))
+      await fs.unlink(path.join(__dirname, `../storage/images/gallery/thumbnail/${filename}`))
+  
+      return 1 // Se eliminaron correctamente
+    } catch (error) {
+      console.error(error)
+      return 0 // Error al eliminar
+    }
   }
 }

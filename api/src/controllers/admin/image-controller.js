@@ -104,30 +104,24 @@ exports.update = (req, res) => {
     }
   }).catch(_ => {
     res.status(500).send({
-      message: 'Algún error ha surgido al actualiazar la id=' + id
+      message: 'Algún error ha surgido al actualizar la id=' + id
     })
   })
 }
 
-exports.delete = (req, res) => {
-  console.log(req.params.filename)
-  // const id = req.params.id
+exports.delete = async (req, res) => {
+  const filename = req.params.filename
 
-  // Image.destroy({
-  //   where: { id }
-  // }).then((numberRowsAffected) => {
-  //   if (numberRowsAffected === 1) {
-  //     res.status(200).send({
-  //       message: 'El elemento ha sido borrado correctamente'
-  //     })
-  //   } else {
-  //     res.status(404).send({
-  //       message: `No se puede borrar el elemento con la id=${id}. Tal vez no se ha encontrado el elemento.`
-  //     })
-  //   }
-  // }).catch(_ => {
-  //   res.status(500).send({
-  //     message: 'Algún error ha surgido al borrar la id=' + id
-  //   })
-  // })
+  try {
+    await req.imageService.deleteImages(filename)
+    await Image.deleteOne({ filename })
+    res.status(200).send({
+      message: 'El elemento ha sido borrado correctamente'
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      message: error.message || 'Algún error ha surgido al borrar el dato.'
+    })
+  }
 }

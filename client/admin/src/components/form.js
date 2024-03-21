@@ -168,26 +168,6 @@ class Form extends HTMLElement {
               outline: none;
               width: 100%;
             }
-
-            .gallery-button-container{
-              align-items: center;
-              color: white;
-              display: flex;
-              flex-direction: column;
-              font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-              font-size: 13px;
-              width: 5rem;
-            }
-
-
-            .gallery-button{
-              border-radius: 20px;
-              font-size: 20px;
-              height: 5rem;
-              width: 5rem;
-            }
-
-
             </style>
 
           <div class='form-container'>
@@ -292,11 +272,11 @@ class Form extends HTMLElement {
                   </div>
                 </div>
                 <div class='tab-content' data-tab='images'>
-                  <div class='gallery'>
-                    <div class='gallery-button-container'>
-                      <h2>Avatar</h2>
-                      <button class="gallery-button"><p>+</p></button>
-                    </div>
+                  <div class='form-label'>
+                    <label>Avatar</label>
+                  </div>
+                  <div class='form-input'>
+                    <gallery-button-container-component name="avatar"></gallery-button-container-component>
                   </div>
                 </div>
             </form>

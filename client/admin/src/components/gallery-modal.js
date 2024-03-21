@@ -210,7 +210,7 @@ class GalleryModal extends HTMLElement {
     const galleryModal = this.shadow.querySelector('.gallery-modal')
     const input = this.shadow.querySelector('#imageInput')
 
-    galleryModal.addEventListener('click', event => {
+    galleryModal.addEventListener('click', async event => {
       if (event.target.closest('.close-button')) {
         this.closeGalleryModal()
       }
@@ -220,7 +220,14 @@ class GalleryModal extends HTMLElement {
         const imageContainer = deleteButton.parentNode
         const image = imageContainer.querySelector('.gallery-image')
         const name = image.src.split('/')
-        this.deleteImage(name[name.length - 1])
+
+        try {
+          await this.deleteImage(name[name.length - 1])
+          // Eliminar la imagen del DOM
+          imageContainer.remove()
+        } catch (error) {
+          console.error(error)
+        }
       }
     })
 
@@ -259,6 +266,7 @@ class GalleryModal extends HTMLElement {
         method: 'DELETE'
       })
     } catch (error) {
+      console.log(error)
     }
   }
 
@@ -271,6 +279,7 @@ class GalleryModal extends HTMLElement {
     const galleryModalContent = this.shadow.querySelector('.gallery-modal-content')
     const imageElementContainer = document.createElement('div')
     imageElementContainer.classList.add('gallery-image-container')
+    imageElementContainer.dataset.filename = imageName
 
     const imageElement = document.createElement('img')
     imageElement.src = `${import.meta.env.VITE_API_URL}/api/admin/images/${imageName}`
@@ -285,6 +294,15 @@ class GalleryModal extends HTMLElement {
 
     // Se cierra el modal al hacer clic en el botón Seleccionar
     this.shadow.querySelector('.select-button').addEventListener('click', () => {
+      const selectedImageContainer = this.shadow.querySelector('.gallery-image-container.selected')
+      if (selectedImageContainer) {
+        const selectedImage = selectedImageContainer.querySelector('.gallery-image')
+        if (selectedImage) {
+          const filename = selectedImageContainer.dataset.filename
+          console.log(selectedImageContainer)
+        }
+      }
+
       const galleryModal = this.shadow.querySelector('.gallery-modal')
       galleryModal.classList.remove('active')
     })
