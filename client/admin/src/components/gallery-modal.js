@@ -1,3 +1,6 @@
+import { store } from '../redux/store.js'
+import { showImage, removeImage } from '../redux/images-slice.js'
+
 class GalleryModal extends HTMLElement {
   constructor () {
     super()
@@ -203,6 +206,26 @@ class GalleryModal extends HTMLElement {
           this.shadow.querySelector('.select-button').classList.add('selected')
         }
       }
+
+      if (event.target.closest('.select-button')) {
+        const selectedImageContainer = this.shadow.querySelector('.gallery-image-container.selected')
+        if (selectedImageContainer) {
+          const selectedImage = selectedImageContainer.querySelector('.gallery-image')
+          if (selectedImage) {
+            let image = store.getState().images.imageGallery
+            const filename = selectedImageContainer.dataset.filename
+            // const alt = this.shadow.querySelector('input[name="alt"]').value
+            // const title = this.shadow.querySelector('input[name="title"]').value
+            // const filename = this.shadow.querySelector('.image.selected').getAttribute('data-filename')
+            image = { ...image, filename }
+
+            store.dispatch(showImage(image))
+          }
+        }
+
+        const galleryModal = this.shadow.querySelector('.gallery-modal')
+        galleryModal.classList.remove('active')
+      }
     })
 
     this.getThumbnails()
@@ -223,7 +246,6 @@ class GalleryModal extends HTMLElement {
 
         try {
           await this.deleteImage(name[name.length - 1])
-          // Eliminar la imagen del DOM
           imageContainer.remove()
         } catch (error) {
           console.error(error)
@@ -291,21 +313,6 @@ class GalleryModal extends HTMLElement {
     imageElementContainer.appendChild(imageElement)
     imageElementContainer.appendChild(closeButton)
     galleryModalContent.appendChild(imageElementContainer)
-
-    // Se cierra el modal al hacer clic en el botón Seleccionar
-    this.shadow.querySelector('.select-button').addEventListener('click', () => {
-      const selectedImageContainer = this.shadow.querySelector('.gallery-image-container.selected')
-      if (selectedImageContainer) {
-        const selectedImage = selectedImageContainer.querySelector('.gallery-image')
-        if (selectedImage) {
-          const filename = selectedImageContainer.dataset.filename
-          console.log(selectedImageContainer)
-        }
-      }
-
-      const galleryModal = this.shadow.querySelector('.gallery-modal')
-      galleryModal.classList.remove('active')
-    })
   }
 }
 

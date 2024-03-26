@@ -13,8 +13,10 @@ export const imagesSlice = createSlice({
       state.imageGallery = action.payload
     },
     showImage: (state, action) => {
+      state.showedImages.push(action.payload)
     },
     showImages: (state, action) => {
+      state.showedImages = action.payload
     },
     addImage: (state, action) => {
     },
